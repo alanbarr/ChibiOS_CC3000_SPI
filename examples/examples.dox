@@ -1,0 +1,14 @@
+/**
+
+@example hardware_setup_stm32l152.c 
+Example of the required hardware setup on a STM32L152 prior to a call to
+cc3000ChibiosWlanInit().
+
+@example udp_client.c 
+Example of a simple UDP client operating on CC3000. Requires additional 
+UDP server to be running on a suitable host.
+
+@example ping.c
+Example of CC3000 issuing a ping.
+
+*/
