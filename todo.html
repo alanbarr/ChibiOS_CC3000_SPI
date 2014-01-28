@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>ChibiOS/RT CC3000 SPI: Main Page</title>
+<title>ChibiOS/RT CC3000 SPI: Todo List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -54,8 +54,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li class="current"><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -90,7 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('index.html','');});
+$(document).ready(function(){initNavTree('todo.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -109,82 +109,19 @@ $(document).ready(function(){initNavTree('index.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ChibiOS/RT CC3000 SPI Documentation</div>  </div>
+<div class="title">Todo List </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2>About</h2>
-<p>This is a SPI driver to enable Texas Instruments' CC3000HostDriver to work with ChibiOS/RT. This was created as part of a final year project at Queen's University Belfast.</p>
-<h2>Setup</h2>
-<p>The CC3000HostDriver is not included with this repository. You can either:</p>
-<ol type="1">
-<li>Run prepare.sh to get the driver and fix some issues in the CC3000HostDriver.</li>
-</ol>
-<p>or</p>
-<ol type="1">
-<li>Get the latest CC3000HostDriver and place it at the root of this repository.</li>
-<li>Run prepare.sh to then fix some issues in the CC3000HostDriver.</li>
-</ol>
-<p>See prepare.sh for more information on what it does. This is required if you don't have bash and need to execute these commands manually.</p>
-<h2>Configuration</h2>
-<ol type="1">
-<li>Copy ./config/cc3000_chibios_config.h into your project and ensure it is included in the build process.</li>
-<li>Setup your hardware SPI configuration. This should be done before calling <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a>. See the examples for an implementation of this on a STM32 platform.</li>
-<li>Edit <a class="el" href="cc3000__chibios__config_8h.html" title="Contains all configuration to use this library with ChibiOS/RT. ">cc3000_chibios_config.h</a> to your requirements.</li>
-<li>In your program you need to include <a class="el" href="cc3000__chibios__api_8h.html" title="Contains the key API required to use this library. ">cc3000_chibios_api.h</a> and call <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a> instead of wlan_init(). See the doxygen API documentation for this library for more information on its use.</li>
-</ol>
-<h2>Building</h2>
-<p>To use this, edit your project makefile (assuming the ChibiOS/RT skeleton Makefile used) with the following: </p>
-<pre class="fragment">#Set the path to library
-CC3000_CHIBIOS_DIR=&lt;path_to_this_repo_from_your_project&gt; 
-
-#Include the library makefile
-include $(CC3000_CHIBIOS_DIR)/cc3000.mk 
-
-#Append $(CC3000SRC) to CSRC list
-CSRC = $(PORTSRC) \   #... Existing CSRC list
-       $(CC3000SRC) 
-
-#Append $(CC3000INC) to INCDIR list
-INCDIR = $(PORTINC) \ #... Existing INCDIR list
-         $(CC3000INC)
-</pre><h2>Compatibility Notes</h2>
-<p>This has been developed against ChibiOS/RT 2.6.x running on a STM32 (STM32L152RC). This library has been written in such a way that any hardware dependant configuration should be made externally, prior to the call to <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a>. This library depends however on HAL elements from ChibiOS/RT which may not be available on all platforms. These are described below.</p>
-<h2>ChibiOS/RT Features Used</h2>
-<ul>
-<li>HAL EXT Driver<ul>
-<li>Interrupt Detect</li>
-</ul>
-</li>
-<li>HAL SPI Driver<ul>
-<li>Communications</li>
-</ul>
-</li>
-<li>HAL PAL Driver<ul>
-<li>Reading and writing to GPIO</li>
-</ul>
-</li>
-<li>Static Thread<ul>
-<li>Processing interrupts</li>
-</ul>
-</li>
-<li>Semaphore<ul>
-<li>Interrupt Signalling</li>
-</ul>
-</li>
-<li>Mutex<ul>
-<li>Permit sharing of SPI driver (optional)</li>
-</ul>
-</li>
-</ul>
-<h2>Links</h2>
-<ul>
-<li><a href="http://alanbarr.github.io/ChibiOS_CC3000_SPI">ChibiOS/RT CC3000 SPI Doxygen</a></li>
-<li><a href="https://github.com/alanbarr/ChibiOS_CC3000_SPI">ChibiOS/RT CC3000 SPI Source</a></li>
-<li><a href="http://processors.wiki.ti.com/index.php/CC3000">TI's CC3000 Wiki</a></li>
-<li><a href="http://www.chibios.org/dokuwiki/doku.php">ChibiOS/RT Homepage</a></li>
-</ul>
-<h2>License</h2>
-<p>All files in this project are licensed under either the BSD 2-Clause license or the BSD 3-Clause license. </p>
+<div class="textblock"><dl class="reflist">
+<dt><a class="anchor" id="_todo000003"></a>Global <a class="el" href="cc3000__spi_8c.html#a75d4973f83f346ab413f8ea7d9bbf254">irqSignalHandlerThread</a>  (void *arg)</dt>
+<dd>TI Issue It seems there is a potential for a race condition here. We can enter processing before we can set what we are expecting to receive in the host driver <a href="http://e2e.ti.com/support/low_power_rf/f/851/t/312391.aspx">http://e2e.ti.com/support/low_power_rf/f/851/t/312391.aspx</a>  </dd>
+<dt><a class="anchor" id="_todo000004"></a>Global <a class="el" href="cc3000__spi_8c.html#ad8a05f5e399bc7fa70e08bf44d1eab02">SpiPauseSpi</a>  (void)</dt>
+<dd>TI issue: This is called from the CC3000HostDriver, even though there is a perfectly usable function pointer registered.  </dd>
+<dt><a class="anchor" id="_todo000002"></a>Global <a class="el" href="cc3000__spi_8c.html#aafc36c8b13e9e7c7f754ef0acf58833e">SpiTriggerRxProcessing</a>  (void)</dt>
+<dd>TI Issue: This is where it is in their example. Can we not just hold this low, until we are done? i.e. move it until just before we return from this function? This should mean the CC3000 won't produce another interrupt until we are done processing this one.  </dd>
+<dt><a class="anchor" id="_todo000001"></a>Global <a class="el" href="cc3000__spi_8h.html#a63fc9cdf3f5322e97080903d1fc544bf">wlan_tx_buffer</a>  [CC3000_TX_BUFFER_SIZE]</dt>
+<dd>TI issue. The host driver (ver 1.11.1) <em>knows</em> its going to be called this, but still goes and stored it in tSLInformation.pucTxCommandBuffer... why? </dd>
+</dl>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
