@@ -131,16 +131,15 @@ static void cc3000Ping(void)
         {
             chThdSleep(MS2ST(100));
         }
+
+        PRINT("--Ping Results--:", NULL);
+        PRINT("Number of Packets Sent: %u", cc3000AsyncData.ping.report.packets_sent);
+        PRINT("Number of Packet Received: %u", cc3000AsyncData.ping.report.packets_received);
+        PRINT("Min Round Time: %u", cc3000AsyncData.ping.report.min_round_time);
+        PRINT("Max Round Time: %u", cc3000AsyncData.ping.report.max_round_time);
+        PRINT("Avg Round Time: %u", cc3000AsyncData.ping.report.avg_round_time);
+        PRINT("--End of Ping Results--", NULL);
     }
-
-    PRINT("--Ping Results--:", NULL);
-    PRINT("Number of Packets Sent: %u", cc3000AsyncData.ping.report.packets_sent);
-    PRINT("Number of Packet Received: %u", cc3000AsyncData.ping.report.packets_received);
-    PRINT("Min Round Time: %u", cc3000AsyncData.ping.report.min_round_time);
-    PRINT("Max Round Time: %u", cc3000AsyncData.ping.report.max_round_time);
-    PRINT("Avg Round Time: %u", cc3000AsyncData.ping.report.avg_round_time);
-    PRINT("--End of Ping Results--", NULL);
-
     palSetPad(LED_PORT, LED_PIN);
     while(1);
 }
