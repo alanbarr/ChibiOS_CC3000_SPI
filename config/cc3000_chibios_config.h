@@ -93,9 +93,9 @@
 /**** Size of the IRQ thread ****/
 /** @brief Working area size of the IRQ thread. */
 #define CHIBIOS_CC3000_IRQ_THD_AREA         512
-/** @brief Priority of the IRQ thread. Should be higher than the thread
- *         using the CC3000 API. */
-#define CHIBIOS_CC3000_IRQ_THD_PRIO         (NORMALPRIO + 1)
+/** @brief Priority of the IRQ thread. 
+ *  @warning Should be higher than the thread using the CC3000 API. */
+#define CHIBIOS_CC3000_IRQ_THD_PRIO         (HIGHPRIO)
 
 /*****************************************************************************/
 /* Under ordinary circumstances, below here should not need to be altered.   */
