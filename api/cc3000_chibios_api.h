@@ -39,13 +39,30 @@
  *  @brief The API which will need to be used in order to correctly use this
  *         library with ChibiOS-RT. 
  *  @{ */
+
+
+
+#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) && \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+/** @brief Format of the callback function used to print debug information. 
+ *  @details @p fmt is a chprintf style formatted string, and the remaining
+ *           arguments are variables for the string place holders. */
+typedef void (*cc3000PrintCb)(const char * fmt, ...);
+#endif
+
 void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            SPIConfig * configuredSpi,
                            EXTDriver * initialisedExtDriver,
                            EXTConfig * configuredExt,
                            tFWPatches sFWPatches,
                            tDriverPatches sDriverPatches,
-                           tBootLoaderPatches sBootLoaderPatches);
+                           tBootLoaderPatches sBootLoaderPatches
+#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) && \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+                           ,
+                           cc3000PrintCb printCallback
+#endif
+                            );
 
 
 

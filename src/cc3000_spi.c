@@ -137,6 +137,13 @@ static WORKING_AREA(irqSignalHandlerThreadWorkingArea,
  **/
 static volatile bool spiPaused = true;
 
+#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) && \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+/** @brief Holds the pointer to the user function called to print debug
+ *         information */
+cc3000PrintCb cc3000Print;
+#endif
+
 #if CHIBIOS_CC3000_SPI_EXCLUSIVE == FALSE
 /** @brief Stores the state of the SPI bus before we acquired it. */
 bool spiWasStoppedBeforeAcquired;
@@ -592,6 +599,10 @@ void SpiResumeSpi(void)
  *  @param[in] sFWPatches See TI's documentation for wlan_init().
  *  @param[in] sDriverPatches See TI's documentation for wlan_init().
  *  @param[in] sBootLoaderPatches See TI's documentation for wlan_init().
+ *  @param     printCallback User defined debug print function. N.B. It will
+ *             only be an argument to this function if
+ *             #CHIBIOS_CC3000_DBG_PRINT_ENABLED is TRUE. In such a case it
+ *             cannot be NULL.
  *  */
 void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            SPIConfig * configuredSpi,
@@ -599,7 +610,13 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            EXTConfig * configuredExt,
                            tFWPatches sFWPatches,
                            tDriverPatches sDriverPatches,
-                           tBootLoaderPatches sBootLoaderPatches)
+                           tBootLoaderPatches sBootLoaderPatches
+#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) || \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+                            ,
+                            cc3000PrintCb printCallback
+#endif
+                            )
 {
     /* Hold the SPI Driver to be used */
     chSpiDriver = initialisedSpiDriver;
@@ -624,6 +641,11 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                                                  CHIBIOS_CC3000_IRQ_EXT_MODE;
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = cc3000ExtCb;
     extStart(chExtDriver, chExtConfig);
+
+#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) || \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+    cc3000Print = printCallback;
+#endif
     
     chBSemInit(&irqSem, TRUE);
 

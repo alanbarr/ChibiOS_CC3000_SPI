@@ -102,9 +102,45 @@
 /*****************************************************************************/
 
 /**** Debug Helpers  ****/
-/**@brief Set to TRUE to enable basic debug print from the SPI Driver. */
-#define CHIBIOS_CC3000_DBG_PRINT_ENABLED    FALSE
+/**@brief Set to TRUE to enable basic debug print from the SPI Driver. 
+ * @details To facilitate this, it will alter some of the API functions. */
+#define CHIBIOS_CC3000_DBG_PRINT_ENABLED    TRUE
 
+/** @def CHIBIOS_CC3000_DBG_PRINT
+ *  @brief Debug message print.
+ *  @details Only if #CHIBIOS_CC3000_DBG_PRINT_ENABLED is TRUE.
+ *  @param fmt Formatted string, appropriate for chprintf().
+ *  @param ... Values for placeholders in @p fmt. */
+
+/** @def CHIBIOS_CC3000_DBG_PRINT_HEX
+ *  @brief Debug hex print.
+ *  @details Only if #CHIBIOS_CC3000_DBG_PRINT_ENABLED is TRUE. 
+ *  @param DATA Memory address of first element to print.
+ *  @param LEN  Length of data to print. */
+
+#if !defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) || \
+            CHIBIOS_CC3000_DBG_PRINT_ENABLED == FALSE
+
+    #define CHIBIOS_CC3000_DBG_PRINT(fmt, ...)
+    #define CHIBIOS_CC3000_DBG_PRINT_HEX(DATA, LEN)
+
+#else 
+    extern  cc3000PrintCb cc3000Print;
+    #define CHIBIOS_CC3000_DBG_PRINT(fmt, ...)                              \
+                cc3000Print("(%s:%d) " fmt "\n\r", __FILE__, __LINE__, __VA_ARGS__)
+
+    #define CHIBIOS_CC3000_DBG_PRINT_HEX(DATA, LEN)                           \
+    {                                                                         \
+        int i = 0;                                                            \
+        while (i++ != LEN)                                                    \
+        {                                                                     \
+            cc3000Print("0x%02x ", DATA[i]);                                  \
+        }                                                                     \
+        cc3000Print("\r\n", NULL)
+    }
+#endif
+
+# if 0
 /**@brief Serial driver to use for debug print.
  * @details This must be configured before calling #cc3000ChibiosWlanInit().
  *          Only required if #CHIBIOS_CC3000_DBG_PRINT_ENABLED is TRUE. */
@@ -195,6 +231,7 @@
 /* This library requires SPI to be blocking. */
 #if (!defined(SPI_USE_WAIT)) || (SPI_USE_WAIT == FALSE)
     #error "SPI_USE_WAIT should be defined as TRUE."
+#endif
 #endif
 
 /* If the SPI bus is not exclusive, we need mutex protection enabled. */
