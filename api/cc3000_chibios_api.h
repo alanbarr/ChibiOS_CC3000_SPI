@@ -47,6 +47,7 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            tDriverPatches sDriverPatches,
                            tBootLoaderPatches sBootLoaderPatches);
 
+void cc3000ChibiosShutdown(void);
 
 
 /** @brief Holds ping report information. */

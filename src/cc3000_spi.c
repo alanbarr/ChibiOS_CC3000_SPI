@@ -142,6 +142,8 @@ static volatile bool spiPaused = true;
 bool spiWasStoppedBeforeAcquired;
 #endif
 
+static Thread * pSignalHandlerThd = NULL;
+
 /** @brief Signals CC3000 for intent to communicate. */
 static void selectCC3000(void)
 {
@@ -339,6 +341,11 @@ static msg_t irqSignalHandlerThread(void *arg)
          * low. */
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on semaphore.", NULL);
         chBSemWait(&irqSem);
+ 
+        if (chThdShouldTerminate())
+        {
+            break;
+        }
 
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on pause.", NULL);
 
@@ -627,10 +634,10 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
     
     chBSemInit(&irqSem, TRUE);
 
-    (void)chThdCreateStatic(irqSignalHandlerThreadWorkingArea,
-                            sizeof(irqSignalHandlerThreadWorkingArea),
-                            CHIBIOS_CC3000_IRQ_THD_PRIO,
-                            irqSignalHandlerThread, NULL);
+    pSignalHandlerThd = chThdCreateStatic(irqSignalHandlerThreadWorkingArea,
+                                          sizeof(irqSignalHandlerThreadWorkingArea),
+                                          CHIBIOS_CC3000_IRQ_THD_PRIO,
+                                          irqSignalHandlerThread, NULL);
 
     /* Ensure the enable pin is low and CC3000 is off */
     palClearPad(CHIBIOS_CC3000_WLAN_EN_PORT, CHIBIOS_CC3000_WLAN_EN_PAD);
@@ -639,5 +646,22 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
     wlan_init(chibiosCc3000AsyncCb, sFWPatches, sDriverPatches, 
               sBootLoaderPatches, cbReadWlanInterruptPin, 
               SpiResumeSpi, SpiPauseSpi, cbWriteWlanPin);
+}
+
+
+void cc3000ChibiosShutdown(void)
+{
+    wlan_stop();
+ 
+    extStop(chExtDriver);
+    chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].mode = EXT_CH_MODE_DISABLED;
+    chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = NULL;
+    extStart(chExtDriver, chExtConfig);
+
+    chThdTerminate(pSignalHandlerThd);
+    chBSemReset(&irqSem, FALSE);
+    chThdWait(pSignalHandlerThd);
+
+    pSignalHandlerThd = NULL;
 }
 
