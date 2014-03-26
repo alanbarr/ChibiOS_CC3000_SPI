@@ -411,8 +411,7 @@ void SpiOpen(gcSpiHandleRx pfRxHandler)
     spiInformation.pRxPacket = (unsigned char *)spi_buffer;
     spiInformation.rxPacketLength = 0;
 
-
-#if CHIBIOS_CC3000_SPI_EXCLUSIVE == TRUE
+#if CHIBIOS_CC3000_EXT_EXCLUSIVE == TRUE
     extStart(chExtDriver, chExtConfig);
 #endif
 
