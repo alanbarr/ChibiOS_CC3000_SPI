@@ -81,11 +81,12 @@
 /** @brief The various states of the CC3000 SPI driver. */
 typedef enum
 {
-    SPI_STATE_POWERUP,      ///< CC3000 powered up (Enable pin high).
-    SPI_STATE_INITIALIZED,  ///< CC3000 has responded to powerup (IRQ low).
-    SPI_STATE_IDLE,         ///< Idle.
-    SPI_STATE_WRITE,        ///< Performing a write operation.
-    SPI_STATE_READ          ///< Performing a read operation.
+    SPI_STATE_POWERUP,         ///< CC3000 powered up (Enable pin high).
+    SPI_STATE_INITIALIZED,     ///< CC3000 has responded to powerup (IRQ low).
+    SPI_STATE_IDLE,            ///< Idle.
+    SPI_STATE_WRITE_REQUESTED, ///< Write has been requested by selecting CC3000.
+    SPI_STATE_WRITE_PERMITTED, ///< Write has been permitted by CC3000 acknowledging.
+    SPI_STATE_READ             ///< Performing a read operation.
 } spiState;
 
 /** @brief Information required by CC3000 SPI driver. */
@@ -125,7 +126,12 @@ static EXTConfig * chExtConfig;
 /** @brief CC3000 SPI driver data. */
 static volatile tSpiInformation spiInformation;
 /** @brief ChibiOS/RT semaphore to signal #irqSignalHandlerThread(). */
+#define DBG_USE_BINARY_SEM FALSE
+#if DBG_USE_BINARY_SEM == TRUE
 static BinarySemaphore irqSem;
+#else
+static Semaphore irqSem;
+#endif
 /** @brief ChibiOS/RT thread working aread for #irqSignalHandlerThread(). */
 static WORKING_AREA(irqSignalHandlerThreadWorkingArea,
                     CHIBIOS_CC3000_IRQ_THD_AREA);
@@ -147,7 +153,6 @@ static void selectCC3000(void)
 {
 #if CHIBIOS_CC3000_SPI_EXCLUSIVE == FALSE 
     spiAcquireBus(chSpiDriver);
-    spiWasStoppedBeforeAcquired = chSpiDriver->state == SPI_STOP ? TRUE : FALSE;
     spiStart(chSpiDriver, &chSpiConfig);
 #endif
 
@@ -161,14 +166,96 @@ static void unselectCC3000(void)
     spiUnselect(chSpiDriver);
 
 #if CHIBIOS_CC3000_SPI_EXCLUSIVE == FALSE 
-    if (spiWasStoppedBeforeAcquired == TRUE)
-    {
-        spiStop(chSpiDriver);
-    }
+    spiStop(chSpiDriver);
     spiReleaseBus(chSpiDriver);
 #endif
 }
 
+/* returns true if set. */
+static bool setSpiState(spiState state)
+{
+#if 0
+    bool rtn = false;
+
+    chSysLock();
+    /* Reading only happends in irq. */
+    if (state == SPI_STATE_READ)
+    {
+        if (spiInformation.spiState == SPI_STATE_IDLE)
+        {
+            spiInformation.spiState = SPI_STATE_READ;
+            rtn = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        chSysUnlock();
+        return rtn;
+    }
+    
+    else if (state == SPI_STATE_INITIALIZED || state == SPI_STATE_POWERUP)
+    {
+        spiInformation.spiState = state;
+        rtn = true;
+        chSysUnlock();
+        return rtn;
+    }
+
+    else if (state == SPI_STATE_WRITE_PERMITTED)
+    {
+        if (spiInformation.spiState != SPI_STATE_WRITE_REQUESTED)
+        {
+            port_halt(); /* This should never, ever happen. Probably */
+        }
+        else
+        {
+            spiInformation.spiState = SPI_STATE_WRITE_PERMITTED;
+            rtn = true;
+        }
+        chSysUnlock();
+        return rtn;
+
+    }
+
+    while(1)
+    {
+        if (state == SPI_STATE_IDLE)
+        {
+            if (spiInformation.spiState == SPI_STATE_WRITE_PERMITTED ||
+                spiInformation.spiState == SPI_STATE_READ ||
+                spiInformation.spiState == SPI_STATE_INITIALIZED) /* TODO consider a first write state */
+            {
+                spiInformation.spiState = SPI_STATE_IDLE;
+                rtn = true;
+                chSysUnlock();
+                break;
+            }
+        }
+        else if (state == SPI_STATE_WRITE_REQUESTED)
+        {
+            if (spiInformation.spiState == SPI_STATE_IDLE)
+            {
+                spiInformation.spiState = SPI_STATE_WRITE_REQUESTED;
+                rtn = true;
+                chSysUnlock();
+                break;
+            }
+        }
+        chSysUnlock();
+        chThdSleep(3);
+        chSysLock();
+    }
+
+    return rtn;
+#else 
+    chSysLock();
+    spiInformation.spiState = state;
+    chSysUnlock();
+    return true;
+#endif
+}
 
 /** @brief Writes data over SPI to the CC3000.
  *  @param data Data to be sent.
@@ -196,7 +283,7 @@ static void SpiFirstWrite(unsigned char *pUserBuffer, unsigned short usLength)
 
     SpiWriteDataSynchronous(pUserBuffer + 4, usLength - 4);
 
-    spiInformation.spiState = SPI_STATE_IDLE;
+    setSpiState(SPI_STATE_IDLE);
 
     unselectCC3000();
 }
@@ -223,6 +310,7 @@ static void SpiReadDataSynchronous(unsigned char *data, unsigned short size)
 static void SpiTriggerRxProcessing(void)
 {
     tSLInformation.WlanInterruptDisable();
+ 
     /** @todo TI Issue: This is where it is in their example.
      * Can we not just hold this low, until we are done? i.e. move it until 
      * just before we return from this function? This should mean the CC3000
@@ -235,11 +323,15 @@ static void SpiTriggerRxProcessing(void)
         while(1);
     }
 
-    spiInformation.spiState = SPI_STATE_IDLE;
+    setSpiState(SPI_STATE_IDLE);
     spiInformation.rxPacketLength = 0;
+ 
 
     /* In 1.11.1: SpiReceiveHandler cc3000_spi.c */
     spiInformation.rxHandlerCb(spiInformation.pRxPacket + SPI_HEADER_SIZE);
+ 
+
+
 }
 
 /** @brief Reads the SPI header from the CC3000. */
@@ -317,7 +409,11 @@ static void cc3000ExtCb(EXTDriver *extp, expchannel_t channel)
     (void)channel;
 
     chSysLockFromIsr();
+#if DBG_USE_BINARY_SEM == TRUE
     chBSemSignalI(&irqSem);
+#else
+    chSemSignalI(&irqSem);
+#endif
     chSysUnlockFromIsr();
 }
 
@@ -338,27 +434,34 @@ static msg_t irqSignalHandlerThread(void *arg)
         /* Wait here until the EXT interrupt signals that the IRQ line went
          * low. */
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on semaphore.", NULL);
+#if DBG_USE_BINARY_SEM == TRUE
         chBSemWait(&irqSem);
+#else
+        chSemWait(&irqSem);
+#endif
 
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on pause.", NULL);
 
         while (spiPaused == true)
         {
-            chThdSleep(10);
+            chThdSleep(5);
         }
 
         CHIBIOS_CC3000_DBG_PRINT("IRQ Running.", NULL);
 
+        while (spiInformation.spiState != SPI_STATE_POWERUP &&
+               spiInformation.spiState != SPI_STATE_IDLE &&
+               spiInformation.spiState != SPI_STATE_WRITE_REQUESTED); /* XXX can this happen?? */
+
         if (spiInformation.spiState == SPI_STATE_POWERUP)
         {
             /* This means IRQ line was low call a callback of HCI Layer to inform on event */
-            spiInformation.spiState = SPI_STATE_INITIALIZED;
+            setSpiState(SPI_STATE_INITIALIZED);
         }
 
         else if (spiInformation.spiState == SPI_STATE_IDLE)
         {
-
-            spiInformation.spiState = SPI_STATE_READ;
+            setSpiState(SPI_STATE_READ);
 
             /* IRQ line goes down - start reception */
             selectCC3000();
@@ -376,14 +479,10 @@ static msg_t irqSignalHandlerThread(void *arg)
             SpiTriggerRxProcessing();
         }
 
-        else if (spiInformation.spiState == SPI_STATE_WRITE)
+        else if (spiInformation.spiState == SPI_STATE_WRITE_REQUESTED)
         {
-            SpiWriteDataSynchronous(spiInformation.pTxPacket,
-                                    spiInformation.txPacketLength);
+            setSpiState(SPI_STATE_WRITE_PERMITTED);
 
-            spiInformation.spiState = SPI_STATE_IDLE;
-
-            unselectCC3000();
         }
     }
 
@@ -404,7 +503,7 @@ void SpiOpen(gcSpiHandleRx pfRxHandler)
     spi_buffer[CC3000_SPI_RX_MAGIC_INDEX] = CC3000_SPI_MAGIC_NUMBER;
     wlan_tx_buffer[CC3000_SPI_TX_MAGIC_INDEX] = CC3000_SPI_MAGIC_NUMBER;
 
-    spiInformation.spiState = SPI_STATE_POWERUP;
+    setSpiState(SPI_STATE_POWERUP);
     spiInformation.rxHandlerCb = pfRxHandler;
     spiInformation.txPacketLength = 0;
     spiInformation.pTxPacket = NULL;
@@ -492,19 +591,28 @@ void SpiWrite(unsigned char *pUserBuffer, unsigned short usLength)
          * once again to not IDLE due to IRQ */
         tSLInformation.WlanInterruptDisable();
 
-        while (spiInformation.spiState != SPI_STATE_IDLE);
+        while (spiInformation.spiState != SPI_STATE_IDLE);  /* TODO sleep */
 
-        spiInformation.spiState = SPI_STATE_WRITE;
+        setSpiState(SPI_STATE_WRITE_REQUESTED);
         spiInformation.pTxPacket = pUserBuffer;
         spiInformation.txPacketLength = usLength;
 
-        /*Assert the CS line and wait till SSI IRQ line is active and then
+        /* Assert the CS line and wait till SSI IRQ line is active and then
          * initialize write operation*/
         selectCC3000();
 
         /*Re-enable IRQ */
         tSLInformation.WlanInterruptEnable();
         chThdYield();
+
+        while (spiInformation.spiState != SPI_STATE_WRITE_PERMITTED); /* TODO sleep */
+
+        SpiWriteDataSynchronous(spiInformation.pTxPacket,
+                                spiInformation.txPacketLength);
+
+        setSpiState(SPI_STATE_IDLE);
+
+        unselectCC3000(); 
     }
 
     /* Due to the fact that we are currently implementing a blocking situation
@@ -543,7 +651,15 @@ static void cbWriteWlanPin(unsigned char val)
  *        is a perfectly usable function pointer registered. */
 static void SpiPauseSpi(void)
 {
+#if 0
+    if (spiPaused != false)
+    {
+        port_halt();
+    }
+#endif
+    chSysLock();
     spiPaused = true;
+    chSysUnlock();
 }
 
 
@@ -552,7 +668,15 @@ static void SpiPauseSpi(void)
  *           interrupts received between a call to #SpiPauseSpi() and this. */
 void SpiResumeSpi(void)
 {
+#if 0
+    if (spiPaused != true)
+    {
+        port_halt();
+    }
+#endif
+    chSysLock();
     spiPaused = false;
+    chSysUnlock();
 }
 
 
@@ -624,7 +748,11 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = cc3000ExtCb;
     extStart(chExtDriver, chExtConfig);
     
+#if DBG_USE_BINARY_SEM == TRUE
     chBSemInit(&irqSem, TRUE);
+#else 
+    chSemInit(&irqSem, 0);
+#endif
 
     (void)chThdCreateStatic(irqSignalHandlerThreadWorkingArea,
                             sizeof(irqSignalHandlerThreadWorkingArea),
