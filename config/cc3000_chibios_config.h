@@ -102,7 +102,7 @@
 /*****************************************************************************/
 
 /**** Debug Helpers  ****/
-/**@brief Set to TRUE to enable basic debug print from the SPI Driver. 
+/**@brief Set to TRUE to enable basic debug print callbacks from the SPI Driver. 
  * @details To facilitate this, it will alter some of the API functions. */
 #define CHIBIOS_CC3000_DBG_PRINT_ENABLED    TRUE
 
