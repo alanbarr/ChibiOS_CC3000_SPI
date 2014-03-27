@@ -138,11 +138,6 @@ static WORKING_AREA(irqSignalHandlerThreadWorkingArea,
  **/
 static volatile bool spiPaused = true;
 
-#if CHIBIOS_CC3000_SPI_EXCLUSIVE == FALSE
-/** @brief Stores the state of the SPI bus before we acquired it. */
-bool spiWasStoppedBeforeAcquired;
-#endif
-
 /** @brief Signals CC3000 for intent to communicate. */
 static void selectCC3000(void)
 {
@@ -166,9 +161,13 @@ static void unselectCC3000(void)
 #endif
 }
 
-/* returns true if set. */
+/** @brief Safely sets the state of the SPI driver. 
+ *  @details This was added for the purpose of easier debug.
+ *  @param state The new state.
+ *  @return True if successful.*/
 static bool setSpiState(spiState state)
 {
+    /* Debug */
 #if 0
     bool rtn = false;
 
