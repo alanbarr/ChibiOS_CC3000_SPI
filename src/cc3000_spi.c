@@ -126,12 +126,7 @@ static EXTConfig * chExtConfig;
 /** @brief CC3000 SPI driver data. */
 static volatile tSpiInformation spiInformation;
 /** @brief ChibiOS/RT semaphore to signal #irqSignalHandlerThread(). */
-#define DBG_USE_BINARY_SEM FALSE
-#if DBG_USE_BINARY_SEM == TRUE
-static BinarySemaphore irqSem;
-#else
 static Semaphore irqSem;
-#endif
 /** @brief ChibiOS/RT thread working aread for #irqSignalHandlerThread(). */
 static WORKING_AREA(irqSignalHandlerThreadWorkingArea,
                     CHIBIOS_CC3000_IRQ_THD_AREA);
@@ -409,11 +404,7 @@ static void cc3000ExtCb(EXTDriver *extp, expchannel_t channel)
     (void)channel;
 
     chSysLockFromIsr();
-#if DBG_USE_BINARY_SEM == TRUE
-    chBSemSignalI(&irqSem);
-#else
     chSemSignalI(&irqSem);
-#endif
     chSysUnlockFromIsr();
 }
 
@@ -434,11 +425,8 @@ static msg_t irqSignalHandlerThread(void *arg)
         /* Wait here until the EXT interrupt signals that the IRQ line went
          * low. */
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on semaphore.", NULL);
-#if DBG_USE_BINARY_SEM == TRUE
-        chBSemWait(&irqSem);
-#else
+
         chSemWait(&irqSem);
-#endif
 
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on pause.", NULL);
 
@@ -748,11 +736,7 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = cc3000ExtCb;
     extStart(chExtDriver, chExtConfig);
     
-#if DBG_USE_BINARY_SEM == TRUE
-    chBSemInit(&irqSem, TRUE);
-#else 
     chSemInit(&irqSem, 0);
-#endif
 
     (void)chThdCreateStatic(irqSignalHandlerThreadWorkingArea,
                             sizeof(irqSignalHandlerThreadWorkingArea),
