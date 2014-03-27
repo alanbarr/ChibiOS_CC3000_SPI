@@ -39,6 +39,7 @@
  *  @brief The API which will need to be used in order to correctly use this
  *         library with ChibiOS-RT. 
  *  @{ */
+
 void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            SPIConfig * configuredSpi,
                            EXTDriver * initialisedExtDriver,

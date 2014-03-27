@@ -142,6 +142,7 @@ static volatile bool spiPaused = true;
 bool spiWasStoppedBeforeAcquired;
 #endif
 
+/** @ brief Pointer to the thread used to process CC3000 interrupts. */
 static Thread * pSignalHandlerThd = NULL;
 
 /** @brief Signals CC3000 for intent to communicate. */
@@ -649,6 +650,11 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
 }
 
 
+/** @brief Responsible for full shut down of the driver.
+ *  @details This deactivates the CC3000 driver by terminating threads and
+ *  any other resources that need to be used. 
+ *  It is unlikely to be often used, since for stopping the CC3000 the host 
+ *  driver function wlan_stop() should be used. */
 void cc3000ChibiosShutdown(void)
 {
     wlan_stop();
@@ -656,7 +662,10 @@ void cc3000ChibiosShutdown(void)
     extStop(chExtDriver);
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].mode = EXT_CH_MODE_DISABLED;
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = NULL;
+
+#if CHIBIOS_CC3000_EXT_EXCLUSIVE != TRUE
     extStart(chExtDriver, chExtConfig);
+#endif
 
     chThdTerminate(pSignalHandlerThd);
     chBSemReset(&irqSem, FALSE);
