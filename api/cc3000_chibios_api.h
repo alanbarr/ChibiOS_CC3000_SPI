@@ -40,7 +40,6 @@
  *         library with ChibiOS-RT. 
  *  @{ */
 
-
 /** @brief Format of the callback function used to print debug information. 
  *  @details @p fmt is a chprintf style formatted string, and the remaining
  *           arguments are variables for the string place holders. */
@@ -55,6 +54,7 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
                            tBootLoaderPatches sBootLoaderPatches,
                            cc3000PrintCb printCallback);
 
+void cc3000ChibiosShutdown(void);
 
 
 /** @brief Holds ping report information. */
