@@ -78,7 +78,7 @@
 /** @brief Pin being used for WLAN Enable control. */
 #define CHIBIOS_CC3000_WLAN_EN_PAD          10
 
-/**** SPI_DRIVER ****/
+/**** SPI Driver****/
 /** @brief Port being used for communications to CC3000. */
 #define CHIBIOS_CC3000_PORT                 GPIOB
 /** @brief Pin used for SPI chip select of CC3000. */
@@ -97,14 +97,14 @@
  *  @warning Should be higher than the thread using the CC3000 API. */
 #define CHIBIOS_CC3000_IRQ_THD_PRIO         (HIGHPRIO)
 
-/*****************************************************************************/
-/* Under ordinary circumstances, below here should not need to be altered.   */
-/*****************************************************************************/
-
 /**** Debug Helpers  ****/
 /**@brief Set to TRUE to enable basic debug print callbacks from the SPI Driver. 
  * @details To facilitate this, it will alter some of the API functions. */
 #define CHIBIOS_CC3000_DBG_PRINT_ENABLED    FALSE
+
+/*****************************************************************************/
+/* Under ordinary circumstances, below here should not need to be altered.   */
+/*****************************************************************************/
 
 /** @def CHIBIOS_CC3000_DBG_PRINT
  *  @brief Debug message print.
