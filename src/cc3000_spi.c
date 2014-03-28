@@ -138,8 +138,7 @@ static WORKING_AREA(irqSignalHandlerThreadWorkingArea,
  **/
 static volatile bool spiPaused = true;
 
-#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) && \
-            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+#if CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
 /** @brief Holds the pointer to the user function called to print debug
  *         information */
 cc3000PrintCb cc3000Print;
@@ -754,8 +753,7 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = cc3000ExtCb;
     extStart(chExtDriver, chExtConfig);
 
-#if defined(CHIBIOS_CC3000_DBG_PRINT_ENABLED) && \
-            CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
+#if CHIBIOS_CC3000_DBG_PRINT_ENABLED == TRUE
     cc3000Print = printCallback;
 #else 
     (void)printCallback;
