@@ -436,16 +436,16 @@ static msg_t irqSignalHandlerThread(void *arg)
  
         chSemWait(&irqSem);
 
-        if (chThdShouldTerminate())
-        {
-            break;
-        }
-
         CHIBIOS_CC3000_DBG_PRINT("IRQ waiting on pause.", NULL);
 
         while (spiPaused == true)
         {
             chThdSleep(5);
+        }
+
+        if (chThdShouldTerminate())
+        {
+            break;
         }
 
         CHIBIOS_CC3000_DBG_PRINT("IRQ Running.", NULL);
@@ -471,11 +471,13 @@ static msg_t irqSignalHandlerThread(void *arg)
 
             SpiReadAfterHeader();
 
+#if 1
             /** @todo TI Issue It seems there is a potential for a race 
              * condition here. We can enter processing before we can set what
              * we are expecting to receive in the host driver 
              * http://e2e.ti.com/support/low_power_rf/f/851/t/312391.aspx */
             chThdSleep(MS2ST(100));
+#endif
 
             SpiTriggerRxProcessing();
         }
@@ -783,9 +785,8 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
  *  driver function wlan_stop() should be used. */
 void cc3000ChibiosShutdown(void)
 {
-    wlan_stop();
- 
     extStop(chExtDriver);
+ 
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].mode = EXT_CH_MODE_DISABLED;
     chExtConfig->channels[CHIBIOS_CC3000_IRQ_PAD].cb = NULL;
 
@@ -794,7 +795,8 @@ void cc3000ChibiosShutdown(void)
 #endif
 
     chThdTerminate(pSignalHandlerThd);
-    chSemReset(&irqSem, 0);
+    spiPaused = false;
+    chSemReset(&irqSem, 1);
     chThdWait(pSignalHandlerThd);
 
     pSignalHandlerThd = NULL;
