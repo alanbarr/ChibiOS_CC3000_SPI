@@ -452,7 +452,12 @@ static msg_t irqSignalHandlerThread(void *arg)
 
         while (spiInformation.spiState != SPI_STATE_POWERUP &&
                spiInformation.spiState != SPI_STATE_IDLE &&
-               spiInformation.spiState != SPI_STATE_WRITE_REQUESTED); /* XXX can this happen?? */
+               spiInformation.spiState != SPI_STATE_WRITE_REQUESTED)
+        {
+            chThdSleep(5); /* XXX can this happen?? - yes.
+                              Witnessed the while loop being hit once while the
+                              state was initialised */
+        }
 
         if (spiInformation.spiState == SPI_STATE_POWERUP)
         {
@@ -743,7 +748,7 @@ void cc3000ChibiosWlanInit(SPIDriver * initialisedSpiDriver,
 
     /* Use configured SPI information. */
     chSpiConfig.end_cb = NULL;
-    chSpiConfig.ssport = CHIBIOS_CC3000_PORT;
+    chSpiConfig.ssport = CHIBIOS_CC3000_NSS_PORT;
     chSpiConfig.sspad = CHIBIOS_CC3000_NSS_PAD;
     
     /* Setup EXT - only want to stop it once. */
