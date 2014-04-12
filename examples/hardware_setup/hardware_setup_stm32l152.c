@@ -25,20 +25,20 @@ void setupCC3000Hw(void)
                         (SPI_CR1_BR_1 | SPI_CR1_BR_0 );  
 
     /* Setup SPI pins. */
-    palSetPad(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD);
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD,
+    palSetPad(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD);
+    palSetPadMode(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD,
                   PAL_MODE_OUTPUT_PUSHPULL |
                   PAL_STM32_OSPEED_LOWEST);     /* 400 kHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_SCK_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_SCK_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MISO_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MISO_PAD,
                   PAL_MODE_ALTERNATE(5));       /* SPI */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MOSI_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MOSI_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */

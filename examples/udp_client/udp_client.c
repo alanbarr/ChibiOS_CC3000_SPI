@@ -17,19 +17,13 @@
 #include "netapp.h"
 
 /* Serial driver to be used */
-#define SERIAL_DRIVER           SD1
+#define SERIAL_DRIVER       SD1
 
 /* SPI driver being used for CC3000 */
-#define SPI_DRIVER              SPID2
+#define SPI_DRIVER          SPID2
 
 /* EXT driver being used for CC3000 */
-#define EXT_DRIVER              EXTD1
-
-#define PRINT(fmt, ...)                                                     \
-        chMtxLock(&printMtx);                                               \
-        chprintf((BaseSequentialStream*)&SERIAL_DRIVER,                     \
-                 "(%s:%d) " fmt "\n\r", __FILE__, __LINE__, __VA_ARGS__);   \
-        chMtxUnlock();
+#define EXT_DRIVER          EXTD1
 
 /* LED for notification setup */
 #define LED_PORT            GPIOB
@@ -65,6 +59,16 @@ Mutex printMtx;
 static SPIConfig chSpiConfig;
 static EXTConfig chExtConfig;
 
+static void print(const char * fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    chMtxLock(&printMtx);
+    chvprintf((BaseSequentialStream*)&SERIAL_DRIVER, fmt, ap);
+    chMtxUnlock();
+    va_end(ap);
+}
+
 static void cc3000Udp(void)
 {
     uint8_t patchVer[2];
@@ -76,30 +80,30 @@ static void cc3000Udp(void)
     int recvRtn = 0;
     tNetappIpconfigRetArgs ipConfig;
 
-    PRINT("Before cc3000ChibiosWlanInit", NULL);
+    print("Before cc3000ChibiosWlanInit", NULL);
     cc3000ChibiosWlanInit(&SPI_DRIVER, &chSpiConfig,
                           &EXT_DRIVER, &chExtConfig,
-                          0,0,0);
-    PRINT("After cc3000ChibiosWlanInit", NULL);
+                          0,0,0, print);
+    print("After cc3000ChibiosWlanInit", NULL);
 
-    PRINT("Before wlan_start", NULL);
+    print("Before wlan_start", NULL);
     wlan_start(0);
-    PRINT("After wlan_start", NULL);
+    print("After wlan_start", NULL);
 
     nvmem_read_sp_version(patchVer);
-    PRINT("--Start of nvmem_read_sp_version--", NULL);
-    PRINT("Package ID: %d", patchVer[0]);
-    PRINT("Build Version: %d", patchVer[1]);
-    PRINT("--End of nvmem_read_sp_version--", NULL);
+    print("--Start of nvmem_read_sp_version--", NULL);
+    print("Package ID: %d", patchVer[0]);
+    print("Build Version: %d", patchVer[1]);
+    print("--End of nvmem_read_sp_version--", NULL);
 
     destAddr.sin_family = AF_INET;
     destAddr.sin_port = htons(REMOTE_PORT);
     destAddr.sin_addr.s_addr = htonl(REMOTE_IP);
 
-    PRINT("Attempting to connect to network...", NULL);
+    print("Attempting to connect to network...", NULL);
     if (wlan_connect(SEC_TYPE, SSID, SSID_LEN, BSSID, KEY, KEY_LEN) != SUCCESS)
     {
-        PRINT("Unable to connect to access point.", NULL);
+        print("Unable to connect to access point.", NULL);
         return;
     }
 
@@ -108,64 +112,64 @@ static void cc3000Udp(void)
         chThdSleep(MS2ST(5));
     }
 
-    PRINT("Connected!", NULL);
+    print("Connected!", NULL);
 
-    PRINT("Waiting for DHCP...", NULL);
+    print("Waiting for DHCP...", NULL);
     while (cc3000AsyncData.dhcp.present != 1)
     {
         chThdSleep(MS2ST(5));
     }
-    PRINT("Received!", NULL);
+    print("Received!", NULL);
 
-    PRINT("Finding IP information...", NULL);
+    print("Finding IP information...", NULL);
     netapp_ipconfig(&ipConfig);
-    PRINT("Found!", NULL);
+    print("Found!", NULL);
 
-    PRINT("Creating socket...", NULL);
+    print("Creating socket...", NULL);
     if ((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == ERROR)
     {
-        PRINT("socket() returned error.", NULL);
+        print("socket() returned error.", NULL);
         return;
     }
-    PRINT("Created!", NULL);
+    print("Created!", NULL);
 
     while (1)
     {
         chThdSleep(S2ST(3));
         palTogglePad(LED_PORT, LED_PIN);
 
-        PRINT("Sending...", NULL);
+        print("Sending...", NULL);
         if (sendto(sock, TX_MSG, TX_MSG_SIZE, 0,
                         (sockaddr*)&destAddr,
                         sizeof(destAddr)) == ERROR)
         {
-            PRINT("sendto() returned error.", NULL);
+            print("sendto() returned error.", NULL);
             return;
         }
-        PRINT("Sent!", NULL);
+        print("Sent!", NULL);
 
         memset(rxBuffer, 0, sizeof (rxBuffer));
 
-        PRINT("Receiving...", NULL);
+        print("Receiving...", NULL);
         if ((recvRtn = recvfrom(sock, rxBuffer, sizeof(rxBuffer),
                                 0, &fromAddr, &fromLen)) == ERROR)
         {
-            PRINT("recvfrom() returned error.", NULL);
+            print("recvfrom() returned error.", NULL);
             return;
         }
 
-        PRINT("Receive return %d.", recvRtn);
+        print("Receive return %d.", recvRtn);
         if (recvRtn == RX_MSG_EXP_SIZE)
         {
             if (strcmp(rxBuffer, RX_MSG_EXP) == 0)
             {
                 palTogglePad(LED_PORT, LED_PIN);
-                PRINT("Received the expected message: %s", rxBuffer);
+                print("Received the expected message: %s", rxBuffer);
                 continue;
             }
         }
         
-        PRINT("Receive not as expected.", NULL);
+        print("Receive not as expected.", NULL);
     }
 }
 
@@ -176,26 +180,26 @@ void setupSpiHw(void)
 
     /* SPI Config */
     chSpiConfig.end_cb = NULL;
-    chSpiConfig.ssport = CHIBIOS_CC3000_PORT;
+    chSpiConfig.ssport = CHIBIOS_CC3000_NSS_PORT;
     chSpiConfig.sspad = CHIBIOS_CC3000_NSS_PAD;
     chSpiConfig.cr1 = SPI_CR1_CPHA |    /* 2nd clock transition first data capture edge */
                       (SPI_CR1_BR_1 | SPI_CR1_BR_0 );   /* BR: 011 - 2 MHz  */
  
     /* Setup SPI pins */
-    palSetPad(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD);
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD,
+    palSetPad(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD);
+    palSetPadMode(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD,
                   PAL_MODE_OUTPUT_PUSHPULL |
                   PAL_STM32_OSPEED_LOWEST);     /* 400 kHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_SCK_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_SCK_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MISO_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MISO_PAD,
                   PAL_MODE_ALTERNATE(5));       /* SPI */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MOSI_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MOSI_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */
