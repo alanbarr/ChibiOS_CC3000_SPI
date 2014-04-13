@@ -1,13 +1,8 @@
 var cc3000__chibios__config_8h =
 [
     [ "CHIBIOS_CC3000_DBG_PRINT", "cc3000__chibios__config_8h.html#ga05269913409c8249e2d24ac801021db4", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_DRIVER", "cc3000__chibios__config_8h.html#ga804fab4e26fb4ca0940de2aa193c3577", null ],
     [ "CHIBIOS_CC3000_DBG_PRINT_ENABLED", "cc3000__chibios__config_8h.html#gab5ef453351273ed8cec165a56a2358d4", null ],
     [ "CHIBIOS_CC3000_DBG_PRINT_HEX", "cc3000__chibios__config_8h.html#gaad8f016b7da5b3199543930e633795c6", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_MTX", "cc3000__chibios__config_8h.html#ga1ed03aaf708855dfe70c30560630829d", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_MTX_LK", "cc3000__chibios__config_8h.html#ga6e7ed4f8d93043571cc505ab38ccceb3", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK", "cc3000__chibios__config_8h.html#gae248119c7f17e22353c59ef1642d453b", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_USE_MTX", "cc3000__chibios__config_8h.html#ga0cce5e12332c583f5a0b8d3420e52bd0", null ],
     [ "CHIBIOS_CC3000_EXT_EXCLUSIVE", "cc3000__chibios__config_8h.html#ga672ff15da862fe5146e780e7211d5399", null ],
     [ "CHIBIOS_CC3000_IRQ_EXT_MODE", "cc3000__chibios__config_8h.html#gab9e6a1b41ea8bf7409f12830165df3a4", null ],
     [ "CHIBIOS_CC3000_IRQ_PAD", "cc3000__chibios__config_8h.html#ga3f186f9addfb5af948874755edbb01e1", null ],
@@ -17,10 +12,10 @@ var cc3000__chibios__config_8h =
     [ "CHIBIOS_CC3000_MISO_PAD", "cc3000__chibios__config_8h.html#gaf7e3f463798761caa8ff5aab5dbe6d76", null ],
     [ "CHIBIOS_CC3000_MOSI_PAD", "cc3000__chibios__config_8h.html#ga516419808764384802137df2c4a8ac10", null ],
     [ "CHIBIOS_CC3000_NSS_PAD", "cc3000__chibios__config_8h.html#gaab5cdc18c52c272bb22fd145303fb22c", null ],
-    [ "CHIBIOS_CC3000_PORT", "cc3000__chibios__config_8h.html#gac534307193c729a49cfb1e4c5d1cddfb", null ],
+    [ "CHIBIOS_CC3000_NSS_PORT", "cc3000__chibios__config_8h.html#gaa5feb8d47e036d69aba8d46a4661bb18", null ],
     [ "CHIBIOS_CC3000_SCK_PAD", "cc3000__chibios__config_8h.html#gae97b6900264f6b6dfb81595bf24d43ad", null ],
     [ "CHIBIOS_CC3000_SPI_EXCLUSIVE", "cc3000__chibios__config_8h.html#ga684b3646824e1ca4e17d03cffa291ed6", null ],
+    [ "CHIBIOS_CC3000_SPI_PORT", "cc3000__chibios__config_8h.html#ga84ec999667972e6506dc8ca8162c3298", null ],
     [ "CHIBIOS_CC3000_WLAN_EN_PAD", "cc3000__chibios__config_8h.html#gae59cbda34d9566999b86850fe60c25a5", null ],
-    [ "CHIBIOS_CC3000_WLAN_EN_PORT", "cc3000__chibios__config_8h.html#ga1a4b1e842e4052f0c04567d3aedfe5e1", null ],
-    [ "CHIBIOS_CC3000_DBG_PRINT_MTX", "cc3000__chibios__config_8h.html#ga55524273b82116a80ee7faf5b3bcba53", null ]
+    [ "CHIBIOS_CC3000_WLAN_EN_PORT", "cc3000__chibios__config_8h.html#ga1a4b1e842e4052f0c04567d3aedfe5e1", null ]
 ];

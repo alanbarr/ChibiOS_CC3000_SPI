@@ -39,7 +39,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ChibiOS/RT CC3000 SPI
-   &#160;<span id="projectnumber">0.01</span>
+   &#160;<span id="projectnumber">0.1</span>
    </div>
    <div id="projectbrief">Allows a device running ChibiOS/RT to interface with TI&#39;s CC3000.</div>
   </td>
@@ -109,8 +109,7 @@ $(document).ready(function(){initNavTree('group__config.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">ChibiOS/RT Configuration</div>  </div>
 </div><!--header-->
@@ -127,15 +126,15 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga684b3646824e1ca4e17d03cffa291ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the SPI driver is used by anything other than the CC3000 driver.  <a href="#ga684b3646824e1ca4e17d03cffa291ed6">More...</a><br/></td></tr>
 <tr class="separator:ga684b3646824e1ca4e17d03cffa291ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab62ce7fb7fc634670846e38386868cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaab62ce7fb7fc634670846e38386868cd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>&#160;&#160;&#160;GPIOB</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>&#160;&#160;&#160;GPIOC</td></tr>
 <tr class="memdesc:gaab62ce7fb7fc634670846e38386868cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port being used for interrupt pin monitoring. <br/></td></tr>
 <tr class="separator:gaab62ce7fb7fc634670846e38386868cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab9e6a1b41ea8bf7409f12830165df3a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab9e6a1b41ea8bf7409f12830165df3a4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gab9e6a1b41ea8bf7409f12830165df3a4">CHIBIOS_CC3000_IRQ_EXT_MODE</a>&#160;&#160;&#160;EXT_MODE_GPIOB</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gab9e6a1b41ea8bf7409f12830165df3a4">CHIBIOS_CC3000_IRQ_EXT_MODE</a>&#160;&#160;&#160;EXT_MODE_GPIOC</td></tr>
 <tr class="memdesc:gab9e6a1b41ea8bf7409f12830165df3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">EXT mode being used for interrupt pin monitoring. <br/></td></tr>
 <tr class="separator:gab9e6a1b41ea8bf7409f12830165df3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f186f9addfb5af948874755edbb01e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga3f186f9addfb5af948874755edbb01e1"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>&#160;&#160;&#160;11</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>&#160;&#160;&#160;2</td></tr>
 <tr class="memdesc:ga3f186f9addfb5af948874755edbb01e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin being used for interrupt pin monitoring. <br/></td></tr>
 <tr class="separator:ga3f186f9addfb5af948874755edbb01e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1a4b1e842e4052f0c04567d3aedfe5e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1a4b1e842e4052f0c04567d3aedfe5e1"></a>
@@ -143,17 +142,21 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga1a4b1e842e4052f0c04567d3aedfe5e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port being used for WLAN Enable control. <br/></td></tr>
 <tr class="separator:ga1a4b1e842e4052f0c04567d3aedfe5e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae59cbda34d9566999b86850fe60c25a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae59cbda34d9566999b86850fe60c25a5"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>&#160;&#160;&#160;10</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>&#160;&#160;&#160;12</td></tr>
 <tr class="memdesc:gae59cbda34d9566999b86850fe60c25a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin being used for WLAN Enable control. <br/></td></tr>
 <tr class="separator:gae59cbda34d9566999b86850fe60c25a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac534307193c729a49cfb1e4c5d1cddfb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac534307193c729a49cfb1e4c5d1cddfb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>&#160;&#160;&#160;GPIOB</td></tr>
-<tr class="memdesc:gac534307193c729a49cfb1e4c5d1cddfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port being used for communications to CC3000. <br/></td></tr>
-<tr class="separator:gac534307193c729a49cfb1e4c5d1cddfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa5feb8d47e036d69aba8d46a4661bb18"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa5feb8d47e036d69aba8d46a4661bb18"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>&#160;&#160;&#160;GPIOC</td></tr>
+<tr class="memdesc:gaa5feb8d47e036d69aba8d46a4661bb18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port being used for chip select. <br/></td></tr>
+<tr class="separator:gaa5feb8d47e036d69aba8d46a4661bb18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab5cdc18c52c272bb22fd145303fb22c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaab5cdc18c52c272bb22fd145303fb22c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>&#160;&#160;&#160;12</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:gaab5cdc18c52c272bb22fd145303fb22c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin used for SPI chip select of CC3000. <br/></td></tr>
 <tr class="separator:gaab5cdc18c52c272bb22fd145303fb22c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga84ec999667972e6506dc8ca8162c3298"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga84ec999667972e6506dc8ca8162c3298"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>&#160;&#160;&#160;GPIOB</td></tr>
+<tr class="memdesc:ga84ec999667972e6506dc8ca8162c3298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port being used for hardware handled communications to CC3000. <br/></td></tr>
+<tr class="separator:ga84ec999667972e6506dc8ca8162c3298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae97b6900264f6b6dfb81595bf24d43ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gae97b6900264f6b6dfb81595bf24d43ad"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">CHIBIOS_CC3000_SCK_PAD</a>&#160;&#160;&#160;13</td></tr>
 <tr class="memdesc:gae97b6900264f6b6dfb81595bf24d43ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin used for SPI clock. <br/></td></tr>
@@ -167,44 +170,21 @@ Macros</h2></td></tr>
 <tr class="memdesc:ga516419808764384802137df2c4a8ac10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin used for SPI MOSI aka CC3000 DIN. <br/></td></tr>
 <tr class="separator:ga516419808764384802137df2c4a8ac10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga759b0e717d0ac1846e1369c5029c9b13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga759b0e717d0ac1846e1369c5029c9b13"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga759b0e717d0ac1846e1369c5029c9b13">CHIBIOS_CC3000_IRQ_THD_AREA</a>&#160;&#160;&#160;512</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga759b0e717d0ac1846e1369c5029c9b13">CHIBIOS_CC3000_IRQ_THD_AREA</a>&#160;&#160;&#160;128</td></tr>
 <tr class="memdesc:ga759b0e717d0ac1846e1369c5029c9b13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Working area size of the IRQ thread. <br/></td></tr>
 <tr class="separator:ga759b0e717d0ac1846e1369c5029c9b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac08699604743b07dc628039cc003c310"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gac08699604743b07dc628039cc003c310"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gac08699604743b07dc628039cc003c310">CHIBIOS_CC3000_IRQ_THD_PRIO</a>&#160;&#160;&#160;(NORMALPRIO + 1)</td></tr>
-<tr class="memdesc:gac08699604743b07dc628039cc003c310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority of the IRQ thread. Should be higher than the thread using the CC3000 API. <br/></td></tr>
+<tr class="memitem:gac08699604743b07dc628039cc003c310"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gac08699604743b07dc628039cc003c310">CHIBIOS_CC3000_IRQ_THD_PRIO</a>&#160;&#160;&#160;(HIGHPRIO)</td></tr>
+<tr class="memdesc:gac08699604743b07dc628039cc003c310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priority of the IRQ thread.  <a href="#gac08699604743b07dc628039cc003c310">More...</a><br/></td></tr>
 <tr class="separator:gac08699604743b07dc628039cc003c310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab5ef453351273ed8cec165a56a2358d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab5ef453351273ed8cec165a56a2358d4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a>&#160;&#160;&#160;FALSE</td></tr>
-<tr class="memdesc:gab5ef453351273ed8cec165a56a2358d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to TRUE to enable basic debug print from the SPI Driver. <br/></td></tr>
+<tr class="memitem:gab5ef453351273ed8cec165a56a2358d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a>&#160;&#160;&#160;FALSE</td></tr>
+<tr class="memdesc:gab5ef453351273ed8cec165a56a2358d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to TRUE to enable basic debug print callbacks from the SPI Driver.  <a href="#gab5ef453351273ed8cec165a56a2358d4">More...</a><br/></td></tr>
 <tr class="separator:gab5ef453351273ed8cec165a56a2358d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga804fab4e26fb4ca0940de2aa193c3577"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>&#160;&#160;&#160;SD1</td></tr>
-<tr class="memdesc:ga804fab4e26fb4ca0940de2aa193c3577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serial driver to use for debug print.  <a href="#ga804fab4e26fb4ca0940de2aa193c3577">More...</a><br/></td></tr>
-<tr class="separator:ga804fab4e26fb4ca0940de2aa193c3577"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0cce5e12332c583f5a0b8d3420e52bd0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga0cce5e12332c583f5a0b8d3420e52bd0">CHIBIOS_CC3000_DBG_PRINT_USE_MTX</a>&#160;&#160;&#160;FALSE</td></tr>
-<tr class="memdesc:ga0cce5e12332c583f5a0b8d3420e52bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets if <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a> is used to protect chprintf's.  <a href="#ga0cce5e12332c583f5a0b8d3420e52bd0">More...</a><br/></td></tr>
-<tr class="separator:ga0cce5e12332c583f5a0b8d3420e52bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1ed03aaf708855dfe70c30560630829d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d">CHIBIOS_CC3000_DBG_PRINT_MTX</a>&#160;&#160;&#160;&lt;global_mutex_protecting_chprintf&gt;</td></tr>
-<tr class="memdesc:ga1ed03aaf708855dfe70c30560630829d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A mutex variable to protect debug print statements.  <a href="#ga1ed03aaf708855dfe70c30560630829d">More...</a><br/></td></tr>
-<tr class="separator:ga1ed03aaf708855dfe70c30560630829d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6e7ed4f8d93043571cc505ab38ccceb3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">CHIBIOS_CC3000_DBG_PRINT_MTX_LK</a>()</td></tr>
-<tr class="memdesc:ga6e7ed4f8d93043571cc505ab38ccceb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks the mutex protecting chprintf messages.  <a href="#ga6e7ed4f8d93043571cc505ab38ccceb3">More...</a><br/></td></tr>
-<tr class="separator:ga6e7ed4f8d93043571cc505ab38ccceb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae248119c7f17e22353c59ef1642d453b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</a>()</td></tr>
-<tr class="memdesc:gae248119c7f17e22353c59ef1642d453b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks the mutex protecting chprintf messages.  <a href="#gae248119c7f17e22353c59ef1642d453b">More...</a><br/></td></tr>
-<tr class="separator:gae248119c7f17e22353c59ef1642d453b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga05269913409c8249e2d24ac801021db4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga05269913409c8249e2d24ac801021db4">CHIBIOS_CC3000_DBG_PRINT</a>(fmt,...)</td></tr>
 <tr class="memdesc:ga05269913409c8249e2d24ac801021db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug message print.  <a href="#ga05269913409c8249e2d24ac801021db4">More...</a><br/></td></tr>
 <tr class="separator:ga05269913409c8249e2d24ac801021db4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad8f016b7da5b3199543930e633795c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#gaad8f016b7da5b3199543930e633795c6">CHIBIOS_CC3000_DBG_PRINT_HEX</a>(DATA, LEN)</td></tr>
 <tr class="memdesc:gaad8f016b7da5b3199543930e633795c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug hex print.  <a href="#gaad8f016b7da5b3199543930e633795c6">More...</a><br/></td></tr>
 <tr class="separator:gaad8f016b7da5b3199543930e633795c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga55524273b82116a80ee7faf5b3bcba53"><td class="memItemLeft" align="right" valign="top">Mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__config.html#ga55524273b82116a80ee7faf5b3bcba53">CHIBIOS_CC3000_DBG_PRINT_MTX</a></td></tr>
-<tr class="memdesc:ga55524273b82116a80ee7faf5b3bcba53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the use of the mutex defined by <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a>.  <a href="#ga55524273b82116a80ee7faf5b3bcba53">More...</a><br/></td></tr>
-<tr class="separator:ga55524273b82116a80ee7faf5b3bcba53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ga05269913409c8249e2d24ac801021db4"></a>
@@ -230,16 +210,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><a class="code" href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">CHIBIOS_CC3000_DBG_PRINT_MTX_LK</a>();                                  \</div>
-<div class="line">        chprintf((BaseSequentialStream*)&amp;<a class="code" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>,   \</div>
-<div class="line">                 <span class="stringliteral">&quot;(%s:%d) &quot;</span> fmt <span class="stringliteral">&quot;\n\r&quot;</span>, __FILE__, __LINE__, __VA_ARGS__);   <a class="code" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">\</a></div>
-<div class="line"><a class="code" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">        CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</a>();</div>
-<div class="ttc" id="group__config_html_ga804fab4e26fb4ca0940de2aa193c3577"><div class="ttname"><a href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_DRIVER</div><div class="ttdoc">Serial driver to use for debug print. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00111">cc3000_chibios_config.h:111</a></div></div>
-<div class="ttc" id="group__config_html_gae248119c7f17e22353c59ef1642d453b"><div class="ttname"><a href="group__config.html#gae248119c7f17e22353c59ef1642d453b">CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK()</div><div class="ttdoc">Unlocks the mutex protecting chprintf messages. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00159">cc3000_chibios_config.h:159</a></div></div>
-<div class="ttc" id="group__config_html_ga6e7ed4f8d93043571cc505ab38ccceb3"><div class="ttname"><a href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">CHIBIOS_CC3000_DBG_PRINT_MTX_LK</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_MTX_LK()</div><div class="ttdoc">Locks the mutex protecting chprintf messages. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00158">cc3000_chibios_config.h:158</a></div></div>
-</div><!-- fragment -->
+
 <p>Debug message print. </p>
-<p>Only if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. Uses the serial driver specified in <a class="el" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577" title="Serial driver to use for debug print. ">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>. </p>
+<p>Only if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print callbacks from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fmt</td><td>Formatted string, appropriate for chprintf(). </td></tr>
@@ -248,24 +221,24 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00170">170</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
+<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00119">119</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga804fab4e26fb4ca0940de2aa193c3577"></a>
+<a class="anchor" id="gab5ef453351273ed8cec165a56a2358d4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_DRIVER&#160;&#160;&#160;SD1</td>
+          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_ENABLED&#160;&#160;&#160;FALSE</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Serial driver to use for debug print. </p>
-<p>This must be configured before calling <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a>. Only required if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. </p>
+<p>Set to TRUE to enable basic debug print callbacks from the SPI Driver. </p>
+<p>To facilitate this, it will alter some of the API functions. </p>
 
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00111">111</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
+<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00099">99</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
 
 </div>
 </div>
@@ -292,24 +265,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">{                                                                         \</div>
-<div class="line">        int i = 0;                                                            <a class="code" href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">\</a></div>
-<div class="line"><a class="code" href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">        CHIBIOS_CC3000_DBG_PRINT_MTX_LK</a>();                                    \</div>
-<div class="line">        while (i++ != LEN)                                                    \</div>
-<div class="line">        {                                                                     \</div>
-<div class="line">            chprintf((BaseSequentialStream*)&amp;<a class="code" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>, \</div>
-<div class="line">                    <span class="stringliteral">&quot;0x%02x &quot;</span>, DATA[i]);                                      \</div>
-<div class="line">        }                                                                     \</div>
-<div class="line">        chprintf((BaseSequentialStream*)&amp;<a class="code" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>,     \</div>
-<div class="line">                  <span class="stringliteral">&quot;\r\n&quot;</span>);                                                    <a class="code" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">\</a></div>
-<div class="line"><a class="code" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">        CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</a>();                                  \</div>
-<div class="line">    }</div>
-<div class="ttc" id="group__config_html_ga804fab4e26fb4ca0940de2aa193c3577"><div class="ttname"><a href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_DRIVER</div><div class="ttdoc">Serial driver to use for debug print. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00111">cc3000_chibios_config.h:111</a></div></div>
-<div class="ttc" id="group__config_html_gae248119c7f17e22353c59ef1642d453b"><div class="ttname"><a href="group__config.html#gae248119c7f17e22353c59ef1642d453b">CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK()</div><div class="ttdoc">Unlocks the mutex protecting chprintf messages. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00159">cc3000_chibios_config.h:159</a></div></div>
-<div class="ttc" id="group__config_html_ga6e7ed4f8d93043571cc505ab38ccceb3"><div class="ttname"><a href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">CHIBIOS_CC3000_DBG_PRINT_MTX_LK</a></div><div class="ttdeci">#define CHIBIOS_CC3000_DBG_PRINT_MTX_LK()</div><div class="ttdoc">Locks the mutex protecting chprintf messages. </div><div class="ttdef"><b>Definition:</b> <a href="cc3000__chibios__config_8h_source.html#l00158">cc3000_chibios_config.h:158</a></div></div>
-</div><!-- fragment -->
+
 <p>Debug hex print. </p>
-<p>Only if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. Uses the serial driver specified in <a class="el" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577" title="Serial driver to use for debug print. ">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>. </p>
+<p>Only if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print callbacks from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">DATA</td><td>Memory address of first element to print. </td></tr>
@@ -318,82 +276,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00176">176</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga1ed03aaf708855dfe70c30560630829d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_MTX&#160;&#160;&#160;&lt;global_mutex_protecting_chprintf&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A mutex variable to protect debug print statements. </p>
-<p>This mutex is needed to prevent occasional muddled text due to threading. </p>
-<dl class="section warning"><dt>Warning</dt><dd>It must be globally available i.e. must not be declared static and must be initialised before calling any CC3000 function. This same mutex should protect all chprintf statements using the driver specified by <a class="el" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577" title="Serial driver to use for debug print. ">CHIBIOS_CC3000_DBG_PRINT_DRIVER</a>. </dd></dl>
-
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00124">124</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga6e7ed4f8d93043571cc505ab38ccceb3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_MTX_LK</td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Locks the mutex protecting chprintf messages. </p>
-<p>Uses <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a> if <a class="el" href="group__config.html#ga0cce5e12332c583f5a0b8d3420e52bd0" title="Sets if CHIBIOS_CC3000_DBG_PRINT_MTX is used to protect chprintf&#39;s. ">CHIBIOS_CC3000_DBG_PRINT_USE_MTX</a> is TRUE. </p>
-
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00158">158</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gae248119c7f17e22353c59ef1642d453b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK</td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Unlocks the mutex protecting chprintf messages. </p>
-<p>Uses <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a> if <a class="el" href="group__config.html#ga0cce5e12332c583f5a0b8d3420e52bd0" title="Sets if CHIBIOS_CC3000_DBG_PRINT_MTX is used to protect chprintf&#39;s. ">CHIBIOS_CC3000_DBG_PRINT_USE_MTX</a> is TRUE. </p>
-
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00159">159</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga0cce5e12332c583f5a0b8d3420e52bd0"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CHIBIOS_CC3000_DBG_PRINT_USE_MTX&#160;&#160;&#160;FALSE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets if <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a> is used to protect chprintf's. </p>
-<p>Only required if <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4" title="Set to TRUE to enable basic debug print from the SPI Driver. ">CHIBIOS_CC3000_DBG_PRINT_ENABLED</a> is TRUE. </p>
-
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00115">115</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
+<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00120">120</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
 
 </div>
 </div>
@@ -414,6 +297,23 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gac08699604743b07dc628039cc003c310"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHIBIOS_CC3000_IRQ_THD_PRIO&#160;&#160;&#160;(HIGHPRIO)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Priority of the IRQ thread. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Should be higher than the thread using the CC3000 API. </dd></dl>
+
+<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00094">94</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga684b3646824e1ca4e17d03cffa291ed6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -426,25 +326,8 @@ Variables</h2></td></tr>
 
 <p>Sets whether the SPI driver is used by anything other than the CC3000 driver. </p>
 <p>When FALSE, ChibiOS SPI mutex support will be utilised to safely acquire the bus before altering the configuration / communicating with the CC3000. This obviously depends on the user correctly protecting the SPI driver alterations external to this library. </p>
-<dl class="section warning"><dt>Warning</dt><dd>Use when FALSE has not currently been tested. This is likely to be an unpopular option however since I believe you would need a buffer between the MCU and CC3000, due to the CC3000 seemingly not being designed to share a bus. See Table 1 CC3000 Module Pins Description in the CC3000 datasheet for more information. </dd></dl>
 
-<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00065">65</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="ga55524273b82116a80ee7faf5b3bcba53"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Mutex CHIBIOS_CC3000_DBG_PRINT_MTX</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allows the use of the mutex defined by <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d" title="A mutex variable to protect debug print statements. ">CHIBIOS_CC3000_DBG_PRINT_MTX</a>. </p>
-<p>Only if CHIBIOS_CC3000_DBG_PRINT_USE_MTX is TRUE. </p>
+<p>Definition at line <a class="el" href="cc3000__chibios__config_8h_source.html#l00059">59</a> of file <a class="el" href="cc3000__chibios__config_8h_source.html">cc3000_chibios_config.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +336,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 28 2014 19:59:14 for ChibiOS/RT CC3000 SPI by
+    <li class="footer">Generated on Sun Apr 13 2014 13:40:36 for ChibiOS/RT CC3000 SPI by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

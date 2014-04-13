@@ -15,6 +15,8 @@ var group__api =
       [ "shutdownOk", "structcc3000_asynchronous_data.html#a9787ce8000af2012a190f7e40e2177b4", null ],
       [ "smartConfigFinished", "structcc3000_asynchronous_data.html#a6385bcfa3dceca112ec363dab883d991", null ]
     ] ],
-    [ "cc3000ChibiosWlanInit", "group__api.html#ga4348379319daf3940838c2ec19225aa4", null ],
+    [ "cc3000PrintCb", "group__api.html#ga383c6916a6301c625ad3a9e5401419f3", null ],
+    [ "cc3000ChibiosShutdown", "group__api.html#ga6a1daf280adc1c6b63ce90a5129cca2b", null ],
+    [ "cc3000ChibiosWlanInit", "group__api.html#gabf20510c428ae7073749327f888d035e", null ],
     [ "cc3000AsyncData", "group__api.html#ga417bd5d3b2c061272ab763a9529c3d8f", null ]
 ];

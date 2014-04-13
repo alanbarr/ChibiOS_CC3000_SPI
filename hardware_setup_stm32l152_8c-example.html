@@ -39,7 +39,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ChibiOS/RT CC3000 SPI
-   &#160;<span id="projectnumber">0.01</span>
+   &#160;<span id="projectnumber">0.1</span>
    </div>
    <div id="projectbrief">Allows a device running ChibiOS/RT to interface with TI&#39;s CC3000.</div>
   </td>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('hardware_setup_stm32l152_8c-example.ht
 <div class="title">hardware_setup_stm32l152.c</div>  </div>
 </div><!--header-->
 <div class="contents">
-<p>Example of the required hardware setup on a STM32L152 prior to a call to <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a>.</p>
+<p>Example of the required hardware setup on a STM32L152 prior to a call to <a class="el" href="group__api.html#gabf20510c428ae7073749327f888d035e" title="To be used instead of wlan_init(). ">cc3000ChibiosWlanInit()</a>.</p>
 <div class="fragment"><div class="line"><span class="comment">/* The following is an example of the hardware setup which is </span></div>
 <div class="line"><span class="comment"> * required before calling cc3000ChibiosWlanInit() on a STM32L152 platform.</span></div>
 <div class="line"><span class="comment"> */</span></div>
@@ -140,30 +140,30 @@ $(document).ready(function(){initNavTree('hardware_setup_stm32l152_8c-example.ht
 <div class="line">                        (SPI_CR1_BR_1 | SPI_CR1_BR_0 );  </div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Setup SPI pins. */</span></div>
-<div class="line">    palSetPad(<a name="a1"></a><a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a2"></a><a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>);</div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>,</div>
+<div class="line">    palSetPad(<a name="a1"></a><a class="code" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>, <a name="a2"></a><a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>);</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>,</div>
 <div class="line">                  PAL_MODE_OUTPUT_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_LOWEST);     <span class="comment">/* 400 kHz */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a3"></a><a class="code" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">CHIBIOS_CC3000_SCK_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a name="a3"></a><a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a4"></a><a class="code" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">CHIBIOS_CC3000_SCK_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5) |       <span class="comment">/* SPI */</span></div>
 <div class="line">                  PAL_STM32_OTYPE_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_MID2);       <span class="comment">/* 10 MHz */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a4"></a><a class="code" href="group__config.html#gaf7e3f463798761caa8ff5aab5dbe6d76">CHIBIOS_CC3000_MISO_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a5"></a><a class="code" href="group__config.html#gaf7e3f463798761caa8ff5aab5dbe6d76">CHIBIOS_CC3000_MISO_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5));       <span class="comment">/* SPI */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a5"></a><a class="code" href="group__config.html#ga516419808764384802137df2c4a8ac10">CHIBIOS_CC3000_MOSI_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a6"></a><a class="code" href="group__config.html#ga516419808764384802137df2c4a8ac10">CHIBIOS_CC3000_MOSI_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5) |       <span class="comment">/* SPI */</span></div>
 <div class="line">                  PAL_STM32_OTYPE_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_MID2);       <span class="comment">/* 10 MHz */</span></div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Setup IRQ pin. */</span></div>
-<div class="line">    palSetPadMode(<a name="a6"></a><a class="code" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>, <a name="a7"></a><a class="code" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a name="a7"></a><a class="code" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>, <a name="a8"></a><a class="code" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>,</div>
 <div class="line">                  PAL_MODE_INPUT_PULLUP);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Setup WLAN EN pin. */</span></div>
-<div class="line">    palClearPad(<a name="a8"></a><a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a name="a9"></a><a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>);</div>
+<div class="line">    palClearPad(<a name="a9"></a><a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a name="a10"></a><a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>);</div>
 <div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>,</div>
 <div class="line">                  PAL_MODE_OUTPUT_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_LOWEST);     <span class="comment">/* 400 kHz */</span></div>
@@ -178,7 +178,7 @@ $(document).ready(function(){initNavTree('hardware_setup_stm32l152_8c-example.ht
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 28 2014 19:59:14 for ChibiOS/RT CC3000 SPI by
+    <li class="footer">Generated on Sun Apr 13 2014 13:40:36 for ChibiOS/RT CC3000 SPI by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

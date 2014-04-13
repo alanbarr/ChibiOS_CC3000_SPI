@@ -39,7 +39,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ChibiOS/RT CC3000 SPI
-   &#160;<span id="projectnumber">0.01</span>
+   &#160;<span id="projectnumber">0.1</span>
    </div>
    <div id="projectbrief">Allows a device running ChibiOS/RT to interface with TI&#39;s CC3000.</div>
   </td>
@@ -132,9 +132,13 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <li>cbWriteWlanPin()
 : <a class="el" href="cc3000__spi_8c.html#a1fb24c21249a3fda2802d91b9cf66939">cc3000_spi.c</a>
 </li>
+<li>cc3000ChibiosShutdown()
+: <a class="el" href="group__api.html#ga6a1daf280adc1c6b63ce90a5129cca2b">cc3000_chibios_api.h</a>
+, <a class="el" href="group__api.html#ga6a1daf280adc1c6b63ce90a5129cca2b">cc3000_spi.c</a>
+</li>
 <li>cc3000ChibiosWlanInit()
-: <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4">cc3000_chibios_api.h</a>
-, <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4">cc3000_spi.c</a>
+: <a class="el" href="group__api.html#gabf20510c428ae7073749327f888d035e">cc3000_spi.c</a>
+, <a class="el" href="group__api.html#gabf20510c428ae7073749327f888d035e">cc3000_chibios_api.h</a>
 </li>
 <li>cc3000ExtCb()
 : <a class="el" href="cc3000__spi_8c.html#af105dd17349a3a2254afdf8194a6274d">cc3000_spi.c</a>
@@ -149,9 +153,12 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <li>selectCC3000()
 : <a class="el" href="cc3000__spi_8c.html#adebefb460c2af311fd68c5d621569346">cc3000_spi.c</a>
 </li>
+<li>setSpiState()
+: <a class="el" href="cc3000__spi_8c.html#a3c5ba7b964bd9adfd792c0829320ae07">cc3000_spi.c</a>
+</li>
 <li>SpiClose()
-: <a class="el" href="cc3000__spi_8c.html#a580fc05259035ebf2f1bbe1041bae4b9">cc3000_spi.c</a>
-, <a class="el" href="cc3000__spi_8h.html#a580fc05259035ebf2f1bbe1041bae4b9">cc3000_spi.h</a>
+: <a class="el" href="cc3000__spi_8h.html#a580fc05259035ebf2f1bbe1041bae4b9">cc3000_spi.h</a>
+, <a class="el" href="cc3000__spi_8c.html#a580fc05259035ebf2f1bbe1041bae4b9">cc3000_spi.c</a>
 </li>
 <li>SpiFirstWrite()
 : <a class="el" href="cc3000__spi_8c.html#a78e155734219e251d3510477b0ed2f75">cc3000_spi.c</a>
@@ -173,15 +180,15 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 : <a class="el" href="cc3000__spi_8c.html#acde74a52c8033e570088afba935199d0">cc3000_spi.c</a>
 </li>
 <li>SpiResumeSpi()
-: <a class="el" href="cc3000__spi_8c.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.c</a>
-, <a class="el" href="cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.h</a>
+: <a class="el" href="cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.h</a>
+, <a class="el" href="cc3000__spi_8c.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.c</a>
 </li>
 <li>SpiTriggerRxProcessing()
 : <a class="el" href="cc3000__spi_8c.html#aafc36c8b13e9e7c7f754ef0acf58833e">cc3000_spi.c</a>
 </li>
 <li>SpiWrite()
-: <a class="el" href="cc3000__spi_8c.html#a5332da00e0ea90e514d91dc0a9aeae59">cc3000_spi.c</a>
-, <a class="el" href="cc3000__spi_8h.html#a5332da00e0ea90e514d91dc0a9aeae59">cc3000_spi.h</a>
+: <a class="el" href="cc3000__spi_8h.html#a5332da00e0ea90e514d91dc0a9aeae59">cc3000_spi.h</a>
+, <a class="el" href="cc3000__spi_8c.html#a5332da00e0ea90e514d91dc0a9aeae59">cc3000_spi.c</a>
 </li>
 <li>SpiWriteDataSynchronous()
 : <a class="el" href="cc3000__spi_8c.html#ae6b590fc7c00d6b2c5cb421ae52bda4d">cc3000_spi.c</a>
@@ -198,7 +205,7 @@ $(document).ready(function(){initNavTree('globals_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 28 2014 19:59:14 for ChibiOS/RT CC3000 SPI by
+    <li class="footer">Generated on Sun Apr 13 2014 13:40:36 for ChibiOS/RT CC3000 SPI by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

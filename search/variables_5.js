@@ -6,6 +6,5 @@ var searchData=
   ['spiinformation',['spiInformation',['../cc3000__spi_8c.html#aa93890d9e073a8028df9a61f7423130b',1,'cc3000_spi.c']]],
   ['spipaused',['spiPaused',['../cc3000__spi_8c.html#a6a6ea030b7098947eb4660ef9017782a',1,'cc3000_spi.c']]],
   ['spireadcommand',['spiReadCommand',['../cc3000__spi_8c.html#aaa1e05e76b122f3ffd34c53f05fe188c',1,'cc3000_spi.c']]],
-  ['spistate',['spiState',['../structt_spi_information.html#a992a46a320c19916ba3b4128f8cef20d',1,'tSpiInformation']]],
-  ['spiwasstoppedbeforeacquired',['spiWasStoppedBeforeAcquired',['../cc3000__spi_8c.html#a52ff7d437a4e8cd912572143c837a3e4',1,'cc3000_spi.c']]]
+  ['spistate',['spiState',['../structt_spi_information.html#a992a46a320c19916ba3b4128f8cef20d',1,'tSpiInformation']]]
 ];

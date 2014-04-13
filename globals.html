@@ -39,7 +39,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ChibiOS/RT CC3000 SPI
-   &#160;<span id="projectnumber">0.01</span>
+   &#160;<span id="projectnumber">0.1</span>
    </div>
    <div id="projectbrief">Allows a device running ChibiOS/RT to interface with TI&#39;s CC3000.</div>
   </td>
@@ -101,6 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_d"><span>d</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
       <li class="current"><a href="#index_w"><span>w</span></a></li>
@@ -188,12 +189,22 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="group__api.html#ga417bd5d3b2c061272ab763a9529c3d8f">async_handler.c</a>
 , <a class="el" href="group__api.html#ga417bd5d3b2c061272ab763a9529c3d8f">cc3000_chibios_api.h</a>
 </li>
+<li>cc3000ChibiosShutdown()
+: <a class="el" href="group__api.html#ga6a1daf280adc1c6b63ce90a5129cca2b">cc3000_spi.c</a>
+, <a class="el" href="group__api.html#ga6a1daf280adc1c6b63ce90a5129cca2b">cc3000_chibios_api.h</a>
+</li>
 <li>cc3000ChibiosWlanInit()
-: <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4">cc3000_spi.c</a>
-, <a class="el" href="group__api.html#ga4348379319daf3940838c2ec19225aa4">cc3000_chibios_api.h</a>
+: <a class="el" href="group__api.html#gabf20510c428ae7073749327f888d035e">cc3000_spi.c</a>
+, <a class="el" href="group__api.html#gabf20510c428ae7073749327f888d035e">cc3000_chibios_api.h</a>
 </li>
 <li>cc3000ExtCb()
 : <a class="el" href="cc3000__spi_8c.html#af105dd17349a3a2254afdf8194a6274d">cc3000_spi.c</a>
+</li>
+<li>cc3000Print
+: <a class="el" href="cc3000__spi_8c.html#af269c1a42c49ca1e76eacfd24aeb56cc">cc3000_spi.c</a>
+</li>
+<li>cc3000PrintCb
+: <a class="el" href="group__api.html#ga383c6916a6301c625ad3a9e5401419f3">cc3000_chibios_api.h</a>
 </li>
 <li>chExtConfig
 : <a class="el" href="cc3000__spi_8c.html#a6ccd98da9647245508c4cfcd573acc20">cc3000_spi.c</a>
@@ -204,26 +215,11 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>CHIBIOS_CC3000_DBG_PRINT
 : <a class="el" href="group__config.html#ga05269913409c8249e2d24ac801021db4">cc3000_chibios_config.h</a>
 </li>
-<li>CHIBIOS_CC3000_DBG_PRINT_DRIVER
-: <a class="el" href="group__config.html#ga804fab4e26fb4ca0940de2aa193c3577">cc3000_chibios_config.h</a>
-</li>
 <li>CHIBIOS_CC3000_DBG_PRINT_ENABLED
 : <a class="el" href="group__config.html#gab5ef453351273ed8cec165a56a2358d4">cc3000_chibios_config.h</a>
 </li>
 <li>CHIBIOS_CC3000_DBG_PRINT_HEX
 : <a class="el" href="group__config.html#gaad8f016b7da5b3199543930e633795c6">cc3000_chibios_config.h</a>
-</li>
-<li>CHIBIOS_CC3000_DBG_PRINT_MTX
-: <a class="el" href="group__config.html#ga1ed03aaf708855dfe70c30560630829d">cc3000_chibios_config.h</a>
-</li>
-<li>CHIBIOS_CC3000_DBG_PRINT_MTX_LK
-: <a class="el" href="group__config.html#ga6e7ed4f8d93043571cc505ab38ccceb3">cc3000_chibios_config.h</a>
-</li>
-<li>CHIBIOS_CC3000_DBG_PRINT_MTX_UNLK
-: <a class="el" href="group__config.html#gae248119c7f17e22353c59ef1642d453b">cc3000_chibios_config.h</a>
-</li>
-<li>CHIBIOS_CC3000_DBG_PRINT_USE_MTX
-: <a class="el" href="group__config.html#ga0cce5e12332c583f5a0b8d3420e52bd0">cc3000_chibios_config.h</a>
 </li>
 <li>CHIBIOS_CC3000_EXT_EXCLUSIVE
 : <a class="el" href="group__config.html#ga672ff15da862fe5146e780e7211d5399">cc3000_chibios_config.h</a>
@@ -252,14 +248,17 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>CHIBIOS_CC3000_NSS_PAD
 : <a class="el" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">cc3000_chibios_config.h</a>
 </li>
-<li>CHIBIOS_CC3000_PORT
-: <a class="el" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">cc3000_chibios_config.h</a>
+<li>CHIBIOS_CC3000_NSS_PORT
+: <a class="el" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">cc3000_chibios_config.h</a>
 </li>
 <li>CHIBIOS_CC3000_SCK_PAD
 : <a class="el" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">cc3000_chibios_config.h</a>
 </li>
 <li>CHIBIOS_CC3000_SPI_EXCLUSIVE
 : <a class="el" href="group__config.html#ga684b3646824e1ca4e17d03cffa291ed6">cc3000_chibios_config.h</a>
+</li>
+<li>CHIBIOS_CC3000_SPI_PORT
+: <a class="el" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">cc3000_chibios_config.h</a>
 </li>
 <li>CHIBIOS_CC3000_WLAN_EN_PAD
 : <a class="el" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">cc3000_chibios_config.h</a>
@@ -268,8 +267,8 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">cc3000_chibios_config.h</a>
 </li>
 <li>chibiosCc3000AsyncCb()
-: <a class="el" href="async__handler_8h.html#a1e8b614be24ed8643d098d950e751156">async_handler.h</a>
-, <a class="el" href="async__handler_8c.html#a1e8b614be24ed8643d098d950e751156">async_handler.c</a>
+: <a class="el" href="async__handler_8c.html#a1e8b614be24ed8643d098d950e751156">async_handler.c</a>
+, <a class="el" href="async__handler_8h.html#a1e8b614be24ed8643d098d950e751156">async_handler.h</a>
 </li>
 <li>chSpiConfig
 : <a class="el" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">cc3000_spi.c</a>
@@ -299,7 +298,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>irqSem
-: <a class="el" href="cc3000__spi_8c.html#a162f2f77cfa55c020686abccd9e6813b">cc3000_spi.c</a>
+: <a class="el" href="cc3000__spi_8c.html#ad7aae243661fe437aba76a6f1b79e8f1">cc3000_spi.c</a>
 </li>
 <li>irqSignalHandlerThread()
 : <a class="el" href="cc3000__spi_8c.html#a75d4973f83f346ab413f8ea7d9bbf254">cc3000_spi.c</a>
@@ -307,9 +306,19 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>pSignalHandlerThd
+: <a class="el" href="cc3000__spi_8c.html#ac23aa1ca8030907fc5aeb050e05c159f">cc3000_spi.c</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>selectCC3000()
 : <a class="el" href="cc3000__spi_8c.html#adebefb460c2af311fd68c5d621569346">cc3000_spi.c</a>
+</li>
+<li>setSpiState()
+: <a class="el" href="cc3000__spi_8c.html#a3c5ba7b964bd9adfd792c0829320ae07">cc3000_spi.c</a>
 </li>
 <li>spi_buffer
 : <a class="el" href="cc3000__spi_8c.html#a1e28cf6fa4c0a9a3b59dfbf3d069d615">cc3000_spi.c</a>
@@ -326,8 +335,11 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>SPI_STATE_READ
 : <a class="el" href="cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa90e22bc74aa45364574bfdffafb79c7e">cc3000_spi.c</a>
 </li>
-<li>SPI_STATE_WRITE
-: <a class="el" href="cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa859e69c9da8293033ea4d6e15a8ac356">cc3000_spi.c</a>
+<li>SPI_STATE_WRITE_PERMITTED
+: <a class="el" href="cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa891646632ed7b841c980163b3f5a277e">cc3000_spi.c</a>
+</li>
+<li>SPI_STATE_WRITE_REQUESTED
+: <a class="el" href="cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaaa9bf7ade9315b2b173f03277e380e3f7">cc3000_spi.c</a>
 </li>
 <li>SpiClose()
 : <a class="el" href="cc3000__spi_8c.html#a580fc05259035ebf2f1bbe1041bae4b9">cc3000_spi.c</a>
@@ -362,17 +374,14 @@ $(document).ready(function(){initNavTree('globals.html','');});
 : <a class="el" href="cc3000__spi_8c.html#acde74a52c8033e570088afba935199d0">cc3000_spi.c</a>
 </li>
 <li>SpiResumeSpi()
-: <a class="el" href="cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.h</a>
-, <a class="el" href="cc3000__spi_8c.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.c</a>
+: <a class="el" href="cc3000__spi_8c.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.c</a>
+, <a class="el" href="cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545">cc3000_spi.h</a>
 </li>
 <li>spiState
 : <a class="el" href="cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892eca">cc3000_spi.c</a>
 </li>
 <li>SpiTriggerRxProcessing()
 : <a class="el" href="cc3000__spi_8c.html#aafc36c8b13e9e7c7f754ef0acf58833e">cc3000_spi.c</a>
-</li>
-<li>spiWasStoppedBeforeAcquired
-: <a class="el" href="cc3000__spi_8c.html#a52ff7d437a4e8cd912572143c837a3e4">cc3000_spi.c</a>
 </li>
 <li>SpiWrite()
 : <a class="el" href="cc3000__spi_8c.html#a5332da00e0ea90e514d91dc0a9aeae59">cc3000_spi.c</a>
@@ -405,7 +414,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 28 2014 19:59:14 for ChibiOS/RT CC3000 SPI by
+    <li class="footer">Generated on Sun Apr 13 2014 13:40:36 for ChibiOS/RT CC3000 SPI by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

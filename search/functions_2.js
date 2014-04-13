@@ -1,6 +1,7 @@
 var searchData=
 [
   ['selectcc3000',['selectCC3000',['../cc3000__spi_8c.html#adebefb460c2af311fd68c5d621569346',1,'cc3000_spi.c']]],
+  ['setspistate',['setSpiState',['../cc3000__spi_8c.html#a3c5ba7b964bd9adfd792c0829320ae07',1,'cc3000_spi.c']]],
   ['spiclose',['SpiClose',['../cc3000__spi_8c.html#a580fc05259035ebf2f1bbe1041bae4b9',1,'SpiClose(void):&#160;cc3000_spi.c'],['../cc3000__spi_8h.html#a580fc05259035ebf2f1bbe1041bae4b9',1,'SpiClose(void):&#160;cc3000_spi.c']]],
   ['spifirstwrite',['SpiFirstWrite',['../cc3000__spi_8c.html#a78e155734219e251d3510477b0ed2f75',1,'cc3000_spi.c']]],
   ['spiopen',['SpiOpen',['../cc3000__spi_8c.html#aafcb30fb8ce789246010661341480485',1,'SpiOpen(gcSpiHandleRx pfRxHandler):&#160;cc3000_spi.c'],['../cc3000__spi_8h.html#aafcb30fb8ce789246010661341480485',1,'SpiOpen(gcSpiHandleRx pfRxHandler):&#160;cc3000_spi.c']]],

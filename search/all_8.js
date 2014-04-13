@@ -1,6 +1,7 @@
 var searchData=
 [
   ['selectcc3000',['selectCC3000',['../cc3000__spi_8c.html#adebefb460c2af311fd68c5d621569346',1,'cc3000_spi.c']]],
+  ['setspistate',['setSpiState',['../cc3000__spi_8c.html#a3c5ba7b964bd9adfd792c0829320ae07',1,'cc3000_spi.c']]],
   ['shutdownok',['shutdownOk',['../structcc3000_asynchronous_data.html#a9787ce8000af2012a190f7e40e2177b4',1,'cc3000AsynchronousData']]],
   ['smartconfigfinished',['smartConfigFinished',['../structcc3000_asynchronous_data.html#a6385bcfa3dceca112ec363dab883d991',1,'cc3000AsynchronousData']]],
   ['spi_5fbuffer',['spi_buffer',['../cc3000__spi_8c.html#a1e28cf6fa4c0a9a3b59dfbf3d069d615',1,'cc3000_spi.c']]],
@@ -8,7 +9,8 @@ var searchData=
   ['spi_5fstate_5finitialized',['SPI_STATE_INITIALIZED',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa934387a91cd093b2d51b6160b84b36b5',1,'cc3000_spi.c']]],
   ['spi_5fstate_5fpowerup',['SPI_STATE_POWERUP',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa4d9e896d4d316bd00e0a79a2709d33e4',1,'cc3000_spi.c']]],
   ['spi_5fstate_5fread',['SPI_STATE_READ',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa90e22bc74aa45364574bfdffafb79c7e',1,'cc3000_spi.c']]],
-  ['spi_5fstate_5fwrite',['SPI_STATE_WRITE',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa859e69c9da8293033ea4d6e15a8ac356',1,'cc3000_spi.c']]],
+  ['spi_5fstate_5fwrite_5fpermitted',['SPI_STATE_WRITE_PERMITTED',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaa891646632ed7b841c980163b3f5a277e',1,'cc3000_spi.c']]],
+  ['spi_5fstate_5fwrite_5frequested',['SPI_STATE_WRITE_REQUESTED',['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892ecaaa9bf7ade9315b2b173f03277e380e3f7',1,'cc3000_spi.c']]],
   ['spiclose',['SpiClose',['../cc3000__spi_8c.html#a580fc05259035ebf2f1bbe1041bae4b9',1,'SpiClose(void):&#160;cc3000_spi.c'],['../cc3000__spi_8h.html#a580fc05259035ebf2f1bbe1041bae4b9',1,'SpiClose(void):&#160;cc3000_spi.c']]],
   ['spifirstwrite',['SpiFirstWrite',['../cc3000__spi_8c.html#a78e155734219e251d3510477b0ed2f75',1,'cc3000_spi.c']]],
   ['spiinformation',['spiInformation',['../cc3000__spi_8c.html#aa93890d9e073a8028df9a61f7423130b',1,'cc3000_spi.c']]],
@@ -22,7 +24,6 @@ var searchData=
   ['spiresumespi',['SpiResumeSpi',['../cc3000__spi_8c.html#a86ae0371b4450b039b3c3c59ade00545',1,'SpiResumeSpi(void):&#160;cc3000_spi.c'],['../cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545',1,'SpiResumeSpi(void):&#160;cc3000_spi.c']]],
   ['spistate',['spiState',['../structt_spi_information.html#a992a46a320c19916ba3b4128f8cef20d',1,'tSpiInformation::spiState()'],['../cc3000__spi_8c.html#a567008606492bfb3851fd6c4c5892eca',1,'spiState():&#160;cc3000_spi.c']]],
   ['spitriggerrxprocessing',['SpiTriggerRxProcessing',['../cc3000__spi_8c.html#aafc36c8b13e9e7c7f754ef0acf58833e',1,'cc3000_spi.c']]],
-  ['spiwasstoppedbeforeacquired',['spiWasStoppedBeforeAcquired',['../cc3000__spi_8c.html#a52ff7d437a4e8cd912572143c837a3e4',1,'cc3000_spi.c']]],
   ['spiwrite',['SpiWrite',['../cc3000__spi_8c.html#a5332da00e0ea90e514d91dc0a9aeae59',1,'SpiWrite(unsigned char *pUserBuffer, unsigned short usLength):&#160;cc3000_spi.c'],['../cc3000__spi_8h.html#a5332da00e0ea90e514d91dc0a9aeae59',1,'SpiWrite(unsigned char *pUserBuffer, unsigned short usLength):&#160;cc3000_spi.c']]],
   ['spiwritedatasynchronous',['SpiWriteDataSynchronous',['../cc3000__spi_8c.html#ae6b590fc7c00d6b2c5cb421ae52bda4d',1,'cc3000_spi.c']]]
 ];

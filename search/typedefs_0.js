@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gcspihandlerx',['gcSpiHandleRx',['../cc3000__spi_8h.html#ab37b07a2bd90751dccf02c85f71e2015',1,'cc3000_spi.h']]]
+  ['cc3000printcb',['cc3000PrintCb',['../group__api.html#ga383c6916a6301c625ad3a9e5401419f3',1,'cc3000_chibios_api.h']]]
 ];

@@ -39,7 +39,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">ChibiOS/RT CC3000 SPI
-   &#160;<span id="projectnumber">0.01</span>
+   &#160;<span id="projectnumber">0.1</span>
    </div>
    <div id="projectbrief">Allows a device running ChibiOS/RT to interface with TI&#39;s CC3000.</div>
   </td>
@@ -132,19 +132,13 @@ $(document).ready(function(){initNavTree('udp_client_8c-example.html','');});
 <div class="line"><span class="preprocessor">#include &quot;netapp.h&quot;</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">/* Serial driver to be used */</span></div>
-<div class="line"><span class="preprocessor">#define SERIAL_DRIVER           SD1</span></div>
+<div class="line"><span class="preprocessor">#define SERIAL_DRIVER       SD1</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="comment">/* SPI driver being used for CC3000 */</span></div>
-<div class="line"><span class="preprocessor">#define SPI_DRIVER              SPID2</span></div>
+<div class="line"><span class="preprocessor">#define SPI_DRIVER          SPID2</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="comment">/* EXT driver being used for CC3000 */</span></div>
-<div class="line"><span class="preprocessor">#define EXT_DRIVER              EXTD1</span></div>
-<div class="line"><span class="preprocessor"></span></div>
-<div class="line"><span class="preprocessor">#define PRINT(fmt, ...)                                                     \</span></div>
-<div class="line"><span class="preprocessor">        chMtxLock(&amp;printMtx);                                               \</span></div>
-<div class="line"><span class="preprocessor">        chprintf((BaseSequentialStream*)&amp;SERIAL_DRIVER,                     \</span></div>
-<div class="line"><span class="preprocessor">                 &quot;(%s:%d) &quot; fmt &quot;\n\r&quot;, __FILE__, __LINE__, __VA_ARGS__);   \</span></div>
-<div class="line"><span class="preprocessor">        chMtxUnlock();</span></div>
+<div class="line"><span class="preprocessor">#define EXT_DRIVER          EXTD1</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line"><span class="comment">/* LED for notification setup */</span></div>
 <div class="line"><span class="preprocessor">#define LED_PORT            GPIOB</span></div>
@@ -180,6 +174,16 @@ $(document).ready(function(){initNavTree('udp_client_8c-example.html','');});
 <div class="line"><span class="keyword">static</span> SPIConfig <a name="a0"></a><a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>;</div>
 <div class="line"><span class="keyword">static</span> EXTConfig <a name="a1"></a><a class="code" href="cc3000__spi_8c.html#a6ccd98da9647245508c4cfcd573acc20">chExtConfig</a>;</div>
 <div class="line"></div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> print(<span class="keyword">const</span> <span class="keywordtype">char</span> * fmt, ...)</div>
+<div class="line">{</div>
+<div class="line">    va_list ap;</div>
+<div class="line">    va_start(ap, fmt);</div>
+<div class="line">    chMtxLock(&amp;printMtx);</div>
+<div class="line">    chvprintf((BaseSequentialStream*)&amp;SERIAL_DRIVER, fmt, ap);</div>
+<div class="line">    chMtxUnlock();</div>
+<div class="line">    va_end(ap);</div>
+<div class="line">}</div>
+<div class="line"></div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> cc3000Udp(<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    uint8_t patchVer[2];</div>
@@ -191,30 +195,30 @@ $(document).ready(function(){initNavTree('udp_client_8c-example.html','');});
 <div class="line">    <span class="keywordtype">int</span> recvRtn = 0;</div>
 <div class="line">    tNetappIpconfigRetArgs ipConfig;</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Before cc3000ChibiosWlanInit&quot;</span>, NULL);</div>
-<div class="line">    <a name="a2"></a><a class="code" href="group__api.html#ga4348379319daf3940838c2ec19225aa4">cc3000ChibiosWlanInit</a>(&amp;SPI_DRIVER, &amp;<a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>,</div>
+<div class="line">    print(<span class="stringliteral">&quot;Before cc3000ChibiosWlanInit&quot;</span>, NULL);</div>
+<div class="line">    <a name="a2"></a><a class="code" href="group__api.html#gabf20510c428ae7073749327f888d035e">cc3000ChibiosWlanInit</a>(&amp;SPI_DRIVER, &amp;<a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>,</div>
 <div class="line">                          &amp;EXT_DRIVER, &amp;<a class="code" href="cc3000__spi_8c.html#a6ccd98da9647245508c4cfcd573acc20">chExtConfig</a>,</div>
-<div class="line">                          0,0,0);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;After cc3000ChibiosWlanInit&quot;</span>, NULL);</div>
+<div class="line">                          0,0,0, print);</div>
+<div class="line">    print(<span class="stringliteral">&quot;After cc3000ChibiosWlanInit&quot;</span>, NULL);</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Before wlan_start&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Before wlan_start&quot;</span>, NULL);</div>
 <div class="line">    wlan_start(0);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;After wlan_start&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;After wlan_start&quot;</span>, NULL);</div>
 <div class="line"></div>
 <div class="line">    nvmem_read_sp_version(patchVer);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;--Start of nvmem_read_sp_version--&quot;</span>, NULL);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Package ID: %d&quot;</span>, patchVer[0]);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Build Version: %d&quot;</span>, patchVer[1]);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;--End of nvmem_read_sp_version--&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;--Start of nvmem_read_sp_version--&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Package ID: %d&quot;</span>, patchVer[0]);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Build Version: %d&quot;</span>, patchVer[1]);</div>
+<div class="line">    print(<span class="stringliteral">&quot;--End of nvmem_read_sp_version--&quot;</span>, NULL);</div>
 <div class="line"></div>
 <div class="line">    destAddr.sin_family = AF_INET;</div>
 <div class="line">    destAddr.sin_port = htons(REMOTE_PORT);</div>
 <div class="line">    destAddr.sin_addr.s_addr = htonl(REMOTE_IP);</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Attempting to connect to network...&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Attempting to connect to network...&quot;</span>, NULL);</div>
 <div class="line">    <span class="keywordflow">if</span> (wlan_connect(SEC_TYPE, SSID, SSID_LEN, BSSID, KEY, KEY_LEN) != SUCCESS)</div>
 <div class="line">    {</div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Unable to connect to access point.&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Unable to connect to access point.&quot;</span>, NULL);</div>
 <div class="line">        <span class="keywordflow">return</span>;</div>
 <div class="line">    }</div>
 <div class="line"></div>
@@ -223,105 +227,105 @@ $(document).ready(function(){initNavTree('udp_client_8c-example.html','');});
 <div class="line">        chThdSleep(MS2ST(5));</div>
 <div class="line">    }</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Connected!&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Connected!&quot;</span>, NULL);</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Waiting for DHCP...&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Waiting for DHCP...&quot;</span>, NULL);</div>
 <div class="line">    <span class="keywordflow">while</span> (<a class="code" href="group__api.html#ga417bd5d3b2c061272ab763a9529c3d8f">cc3000AsyncData</a>.<a name="a5"></a><a class="code" href="structcc3000_asynchronous_data.html#a665227d2e2784c9a573e9b01a86b8c7e">dhcp</a>.<a name="a6"></a><a class="code" href="structdhcp_information.html#aa84cc4dc60e16481b79b15b815aaea31">present</a> != 1)</div>
 <div class="line">    {</div>
 <div class="line">        chThdSleep(MS2ST(5));</div>
 <div class="line">    }</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Received!&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Received!&quot;</span>, NULL);</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Finding IP information...&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Finding IP information...&quot;</span>, NULL);</div>
 <div class="line">    netapp_ipconfig(&amp;ipConfig);</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Found!&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Found!&quot;</span>, NULL);</div>
 <div class="line"></div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Creating socket...&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Creating socket...&quot;</span>, NULL);</div>
 <div class="line">    <span class="keywordflow">if</span> ((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == ERROR)</div>
 <div class="line">    {</div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;socket() returned error.&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;socket() returned error.&quot;</span>, NULL);</div>
 <div class="line">        <span class="keywordflow">return</span>;</div>
 <div class="line">    }</div>
-<div class="line">    PRINT(<span class="stringliteral">&quot;Created!&quot;</span>, NULL);</div>
+<div class="line">    print(<span class="stringliteral">&quot;Created!&quot;</span>, NULL);</div>
 <div class="line"></div>
 <div class="line">    <span class="keywordflow">while</span> (1)</div>
 <div class="line">    {</div>
 <div class="line">        chThdSleep(S2ST(3));</div>
 <div class="line">        palTogglePad(LED_PORT, LED_PIN);</div>
 <div class="line"></div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Sending...&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Sending...&quot;</span>, NULL);</div>
 <div class="line">        <span class="keywordflow">if</span> (sendto(sock, TX_MSG, TX_MSG_SIZE, 0,</div>
 <div class="line">                        (sockaddr*)&amp;destAddr,</div>
 <div class="line">                        <span class="keyword">sizeof</span>(destAddr)) == ERROR)</div>
 <div class="line">        {</div>
-<div class="line">            PRINT(<span class="stringliteral">&quot;sendto() returned error.&quot;</span>, NULL);</div>
+<div class="line">            print(<span class="stringliteral">&quot;sendto() returned error.&quot;</span>, NULL);</div>
 <div class="line">            <span class="keywordflow">return</span>;</div>
 <div class="line">        }</div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Sent!&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Sent!&quot;</span>, NULL);</div>
 <div class="line"></div>
 <div class="line">        memset(rxBuffer, 0, <span class="keyword">sizeof</span> (rxBuffer));</div>
 <div class="line"></div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Receiving...&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Receiving...&quot;</span>, NULL);</div>
 <div class="line">        <span class="keywordflow">if</span> ((recvRtn = recvfrom(sock, rxBuffer, <span class="keyword">sizeof</span>(rxBuffer),</div>
 <div class="line">                                0, &amp;fromAddr, &amp;fromLen)) == ERROR)</div>
 <div class="line">        {</div>
-<div class="line">            PRINT(<span class="stringliteral">&quot;recvfrom() returned error.&quot;</span>, NULL);</div>
+<div class="line">            print(<span class="stringliteral">&quot;recvfrom() returned error.&quot;</span>, NULL);</div>
 <div class="line">            <span class="keywordflow">return</span>;</div>
 <div class="line">        }</div>
 <div class="line"></div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Receive return %d.&quot;</span>, recvRtn);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Receive return %d.&quot;</span>, recvRtn);</div>
 <div class="line">        <span class="keywordflow">if</span> (recvRtn == RX_MSG_EXP_SIZE)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">if</span> (strcmp(rxBuffer, RX_MSG_EXP) == 0)</div>
 <div class="line">            {</div>
 <div class="line">                palTogglePad(LED_PORT, LED_PIN);</div>
-<div class="line">                PRINT(<span class="stringliteral">&quot;Received the expected message: %s&quot;</span>, rxBuffer);</div>
+<div class="line">                print(<span class="stringliteral">&quot;Received the expected message: %s&quot;</span>, rxBuffer);</div>
 <div class="line">                <span class="keywordflow">continue</span>;</div>
 <div class="line">            }</div>
 <div class="line">        }</div>
 <div class="line">        </div>
-<div class="line">        PRINT(<span class="stringliteral">&quot;Receive not as expected.&quot;</span>, NULL);</div>
+<div class="line">        print(<span class="stringliteral">&quot;Receive not as expected.&quot;</span>, NULL);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"></div>
 <div class="line"></div>
 <div class="line"><span class="keywordtype">void</span> setupSpiHw(<span class="keywordtype">void</span>)</div>
-<div class="line"></div>
+<div class="line">{</div>
 <div class="line"><span class="preprocessor">#ifdef STM32L1XX_MD</span></div>
 <div class="line"><span class="preprocessor"></span></div>
 <div class="line">    <span class="comment">/* SPI Config */</span></div>
 <div class="line">    <a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>.end_cb = NULL;</div>
-<div class="line">    <a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>.ssport = <a name="a7"></a><a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>;</div>
+<div class="line">    <a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>.ssport = <a name="a7"></a><a class="code" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>;</div>
 <div class="line">    <a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>.sspad = <a name="a8"></a><a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>;</div>
 <div class="line">    <a class="code" href="cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2">chSpiConfig</a>.cr1 = SPI_CR1_CPHA |    <span class="comment">/* 2nd clock transition first data capture edge */</span></div>
 <div class="line">                      (SPI_CR1_BR_1 | SPI_CR1_BR_0 );   <span class="comment">/* BR: 011 - 2 MHz  */</span></div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">/* Setup SPI pins */</span></div>
-<div class="line">    palSetPad(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>);</div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>,</div>
+<div class="line">    palSetPad(<a class="code" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>);</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gaa5feb8d47e036d69aba8d46a4661bb18">CHIBIOS_CC3000_NSS_PORT</a>, <a class="code" href="group__config.html#gaab5cdc18c52c272bb22fd145303fb22c">CHIBIOS_CC3000_NSS_PAD</a>,</div>
 <div class="line">                  PAL_MODE_OUTPUT_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_LOWEST);     <span class="comment">/* 400 kHz */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a9"></a><a class="code" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">CHIBIOS_CC3000_SCK_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a name="a9"></a><a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a10"></a><a class="code" href="group__config.html#gae97b6900264f6b6dfb81595bf24d43ad">CHIBIOS_CC3000_SCK_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5) |       <span class="comment">/* SPI */</span></div>
 <div class="line">                  PAL_STM32_OTYPE_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_MID2);       <span class="comment">/* 10 MHz */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a10"></a><a class="code" href="group__config.html#gaf7e3f463798761caa8ff5aab5dbe6d76">CHIBIOS_CC3000_MISO_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a11"></a><a class="code" href="group__config.html#gaf7e3f463798761caa8ff5aab5dbe6d76">CHIBIOS_CC3000_MISO_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5));       <span class="comment">/* SPI */</span></div>
 <div class="line"></div>
-<div class="line">    palSetPadMode(<a class="code" href="group__config.html#gac534307193c729a49cfb1e4c5d1cddfb">CHIBIOS_CC3000_PORT</a>, <a name="a11"></a><a class="code" href="group__config.html#ga516419808764384802137df2c4a8ac10">CHIBIOS_CC3000_MOSI_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga84ec999667972e6506dc8ca8162c3298">CHIBIOS_CC3000_SPI_PORT</a>, <a name="a12"></a><a class="code" href="group__config.html#ga516419808764384802137df2c4a8ac10">CHIBIOS_CC3000_MOSI_PAD</a>,</div>
 <div class="line">                  PAL_MODE_ALTERNATE(5) |       <span class="comment">/* SPI */</span></div>
 <div class="line">                  PAL_STM32_OTYPE_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_MID2);       <span class="comment">/* 10 MHz */</span></div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Setup IRQ pin */</span></div>
-<div class="line">    palSetPadMode(<a name="a12"></a><a class="code" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>, <a name="a13"></a><a class="code" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>,</div>
+<div class="line">    palSetPadMode(<a name="a13"></a><a class="code" href="group__config.html#gaab62ce7fb7fc634670846e38386868cd">CHIBIOS_CC3000_IRQ_PORT</a>, <a name="a14"></a><a class="code" href="group__config.html#ga3f186f9addfb5af948874755edbb01e1">CHIBIOS_CC3000_IRQ_PAD</a>,</div>
 <div class="line">                  PAL_MODE_INPUT_PULLUP);</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">/* Setup WLAN EN pin.</span></div>
 <div class="line"><span class="comment">       With the pin low, we sleep here to make sure CC3000 is off.  */</span></div>
-<div class="line">    palClearPad(<a name="a14"></a><a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a name="a15"></a><a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>);</div>
+<div class="line">    palClearPad(<a name="a15"></a><a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a name="a16"></a><a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>);</div>
 <div class="line">    palSetPadMode(<a class="code" href="group__config.html#ga1a4b1e842e4052f0c04567d3aedfe5e1">CHIBIOS_CC3000_WLAN_EN_PORT</a>, <a class="code" href="group__config.html#gae59cbda34d9566999b86850fe60c25a5">CHIBIOS_CC3000_WLAN_EN_PAD</a>,</div>
 <div class="line">                  PAL_MODE_OUTPUT_PUSHPULL |</div>
 <div class="line">                  PAL_STM32_OSPEED_LOWEST);     <span class="comment">/* 400 kHz */</span></div>
@@ -372,7 +376,7 @@ $(document).ready(function(){initNavTree('udp_client_8c-example.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Jan 28 2014 19:59:14 for ChibiOS/RT CC3000 SPI by
+    <li class="footer">Generated on Sun Apr 13 2014 13:40:36 for ChibiOS/RT CC3000 SPI by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
