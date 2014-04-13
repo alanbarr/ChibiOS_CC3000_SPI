@@ -19,13 +19,6 @@
 /* EXT driver being used for CC3000 */
 #define EXT_DRIVER          EXTD1
 
-/* Enable / Disable chprintf's */
-#define PRINT(fmt, ...)                                                     \
-        chMtxLock(&printMtx);                                               \
-        chprintf((BaseSequentialStream*)&SERIAL_DRIVER,                     \
-                 "(%s:%d) " fmt "\n\r", __FILE__, __LINE__, __VA_ARGS__);   \
-        chMtxUnlock();
-
 /* LED for notification setup */
 #define LED_PORT            GPIOB
 #define LED_PIN             GPIOB_LED3
@@ -65,6 +58,16 @@ Mutex printMtx;
 static SPIConfig chSpiConfig;
 static EXTConfig chExtConfig;
 
+static void print(const char * fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    chMtxLock(&printMtx);
+    chvprintf((BaseSequentialStream*)&SERIAL_DRIVER, fmt, ap);
+    chMtxUnlock();
+    va_end(ap);
+}
+
 /* Ping example */
 static void cc3000Ping(void)
 {
@@ -72,27 +75,27 @@ static void cc3000Ping(void)
     uint32_t remoteHostIp;
     tNetappIpconfigRetArgs ipConfig;
 
-    PRINT("Before cc3000ChibiosWlanInit", NULL);
+    print("Before cc3000ChibiosWlanInit", NULL);
     cc3000ChibiosWlanInit(&SPI_DRIVER, &chSpiConfig,
                           &EXT_DRIVER, &chExtConfig,
-                          0,0,0);
-    PRINT("After cc3000ChibiosWlanInit", NULL);
+                          0,0,0,print);
+    print("After cc3000ChibiosWlanInit", NULL);
 
-    PRINT("Before wlan_start", NULL);
+    print("Before wlan_start", NULL);
     wlan_start(0);
-    PRINT("After wlan_start", NULL);
+    print("After wlan_start", NULL);
 
     /* Read version info */
     nvmem_read_sp_version(patchVer);
-    PRINT("--Start of nvmem_read_sp_version--", NULL);
-    PRINT("Package ID: %d", patchVer[0]);
-    PRINT("Build Version: %d", patchVer[1]);
-    PRINT("--End of nvmem_read_sp_version--", NULL);
+    print("--Start of nvmem_read_sp_version--", NULL);
+    print("Package ID: %d", patchVer[0]);
+    print("Build Version: %d", patchVer[1]);
+    print("--End of nvmem_read_sp_version--", NULL);
 
-    PRINT("Attempting to connect to network...", NULL);
+    print("Attempting to connect to network...", NULL);
     if (wlan_connect(SEC_TYPE, SSID, SSID_LEN, BSSID, KEY, KEY_LEN) != SUCCESS)
     {
-        PRINT("Unable to connect to access point.", NULL);
+        print("Unable to connect to access point.", NULL);
         return;
     }
 
@@ -100,30 +103,30 @@ static void cc3000Ping(void)
     {
         chThdSleep(MS2ST(5));
     }
-    PRINT("Connected!", NULL);
+    print("Connected!", NULL);
 
-    PRINT("Waiting for DHCP...", NULL);
+    print("Waiting for DHCP...", NULL);
     while (cc3000AsyncData.dhcp.present != 1)
     {
         chThdSleep(MS2ST(5));
     }
-    PRINT("Received!", NULL);
+    print("Received!", NULL);
 
-    PRINT("Finding IP information...", NULL);
+    print("Finding IP information...", NULL);
     netapp_ipconfig(&ipConfig);
-    PRINT("Found!", NULL);
+    print("Found!", NULL);
 
-    PRINT("Looking up IP of %s...", HOSTNAME);
+    print("Looking up IP of %s...", HOSTNAME);
     gethostbyname(HOSTNAME, HOSTNAME_LENGTH, &remoteHostIp);
     remoteHostIp = htonl(remoteHostIp);
-    PRINT("IP of %s is %x", HOSTNAME, remoteHostIp);
+    print("IP of %s is %x", HOSTNAME, remoteHostIp);
 
     /* I believe there is an active bug against the ping report where 
      * some of the numbers are incorrect. Loop here forever waiting on 
      * a valid response and hope it arrives... */
     while (cc3000AsyncData.ping.report.packets_received != 3)
     {
-        PRINT("Pinging...", NULL);
+        print("Pinging...", NULL);
         memset((void *)&cc3000AsyncData.ping, 0, sizeof(cc3000AsyncData.ping));
         netapp_ping_send(&remoteHostIp, 3, 10, 3000);
         
@@ -132,13 +135,13 @@ static void cc3000Ping(void)
             chThdSleep(MS2ST(100));
         }
 
-        PRINT("--Ping Results--:", NULL);
-        PRINT("Number of Packets Sent: %u", cc3000AsyncData.ping.report.packets_sent);
-        PRINT("Number of Packet Received: %u", cc3000AsyncData.ping.report.packets_received);
-        PRINT("Min Round Time: %u", cc3000AsyncData.ping.report.min_round_time);
-        PRINT("Max Round Time: %u", cc3000AsyncData.ping.report.max_round_time);
-        PRINT("Avg Round Time: %u", cc3000AsyncData.ping.report.avg_round_time);
-        PRINT("--End of Ping Results--", NULL);
+        print("--Ping Results--:", NULL);
+        print("Number of Packets Sent: %u", cc3000AsyncData.ping.report.packets_sent);
+        print("Number of Packet Received: %u", cc3000AsyncData.ping.report.packets_received);
+        print("Min Round Time: %u", cc3000AsyncData.ping.report.min_round_time);
+        print("Max Round Time: %u", cc3000AsyncData.ping.report.max_round_time);
+        print("Avg Round Time: %u", cc3000AsyncData.ping.report.avg_round_time);
+        print("--End of Ping Results--", NULL);
     }
     palSetPad(LED_PORT, LED_PIN);
     while(1);
@@ -151,26 +154,26 @@ void setupSpiHw(void)
 
     /* SPI Config */
     chSpiConfig.end_cb = NULL;
-    chSpiConfig.ssport = CHIBIOS_CC3000_PORT;
+    chSpiConfig.ssport = CHIBIOS_CC3000_NSS_PORT;
     chSpiConfig.sspad = CHIBIOS_CC3000_NSS_PAD;
     chSpiConfig.cr1 = SPI_CR1_CPHA |    /* 2nd clock transition first data capture edge */
                       (SPI_CR1_BR_1 | SPI_CR1_BR_0 );   /* BR: 011 - 2 MHz */
 
     /* Setup SPI pins */
-    palSetPad(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD);
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_NSS_PAD,
+    palSetPad(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD);
+    palSetPadMode(CHIBIOS_CC3000_NSS_PORT, CHIBIOS_CC3000_NSS_PAD,
                   PAL_MODE_OUTPUT_PUSHPULL |
                   PAL_STM32_OSPEED_LOWEST);     /* 400 kHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_SCK_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_SCK_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MISO_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MISO_PAD,
                   PAL_MODE_ALTERNATE(5));       /* SPI */
 
-    palSetPadMode(CHIBIOS_CC3000_PORT, CHIBIOS_CC3000_MOSI_PAD,
+    palSetPadMode(CHIBIOS_CC3000_SPI_PORT, CHIBIOS_CC3000_MOSI_PAD,
                   PAL_MODE_ALTERNATE(5) |       /* SPI */
                   PAL_STM32_OTYPE_PUSHPULL |
                   PAL_STM32_OSPEED_MID2);       /* 10 MHz */
