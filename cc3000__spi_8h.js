@@ -1,6 +1,6 @@
 var cc3000__spi_8h =
 [
-    [ "gcSpiHandleRx", "cc3000__spi_8h.html#ab37b07a2bd90751dccf02c85f71e2015", null ],
+    [ "gcSpiHandleRx", "cc3000__spi_8h.html#a321f9bddb271d2254a90901560f08c1a", null ],
     [ "SpiClose", "cc3000__spi_8h.html#a580fc05259035ebf2f1bbe1041bae4b9", null ],
     [ "SpiOpen", "cc3000__spi_8h.html#aafcb30fb8ce789246010661341480485", null ],
     [ "SpiResumeSpi", "cc3000__spi_8h.html#a86ae0371b4450b039b3c3c59ade00545", null ],

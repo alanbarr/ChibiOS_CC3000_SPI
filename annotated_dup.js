@@ -1,4 +1,4 @@
-var annotated =
+var annotated_dup =
 [
     [ "cc3000AsynchronousData", "structcc3000_asynchronous_data.html", "structcc3000_asynchronous_data" ],
     [ "dhcpInformation", "structdhcp_information.html", "structdhcp_information" ],

@@ -25,7 +25,7 @@ var searchData=
   ['cc3000chibioswlaninit',['cc3000ChibiosWlanInit',['../group__api.html#gabf20510c428ae7073749327f888d035e',1,'cc3000ChibiosWlanInit(SPIDriver *initialisedSpiDriver, SPIConfig *configuredSpi, EXTDriver *initialisedExtDriver, EXTConfig *configuredExt, tFWPatches sFWPatches, tDriverPatches sDriverPatches, tBootLoaderPatches sBootLoaderPatches, cc3000PrintCb printCallback):&#160;cc3000_spi.c'],['../group__api.html#gabf20510c428ae7073749327f888d035e',1,'cc3000ChibiosWlanInit(SPIDriver *initialisedSpiDriver, SPIConfig *configuredSpi, EXTDriver *initialisedExtDriver, EXTConfig *configuredExt, tFWPatches sFWPatches, tDriverPatches sDriverPatches, tBootLoaderPatches sBootLoaderPatches, cc3000PrintCb printCallback):&#160;cc3000_spi.c']]],
   ['cc3000extcb',['cc3000ExtCb',['../cc3000__spi_8c.html#af105dd17349a3a2254afdf8194a6274d',1,'cc3000_spi.c']]],
   ['cc3000print',['cc3000Print',['../cc3000__spi_8c.html#af269c1a42c49ca1e76eacfd24aeb56cc',1,'cc3000_spi.c']]],
-  ['cc3000printcb',['cc3000PrintCb',['../group__api.html#ga383c6916a6301c625ad3a9e5401419f3',1,'cc3000_chibios_api.h']]],
+  ['cc3000printcb',['cc3000PrintCb',['../group__api.html#ga646c7c20ae2af2a39708fcdb953e69bf',1,'cc3000_chibios_api.h']]],
   ['chextconfig',['chExtConfig',['../cc3000__spi_8c.html#a6ccd98da9647245508c4cfcd573acc20',1,'cc3000_spi.c']]],
   ['chextdriver',['chExtDriver',['../cc3000__spi_8c.html#a86b2e6f5a5ffc21a0eafd6c0986b8f9c',1,'cc3000_spi.c']]],
   ['chibios_5fcc3000_5fdbg_5fprint',['CHIBIOS_CC3000_DBG_PRINT',['../group__config.html#ga05269913409c8249e2d24ac801021db4',1,'cc3000_chibios_config.h']]],
@@ -50,5 +50,6 @@ var searchData=
   ['chspiconfig',['chSpiConfig',['../cc3000__spi_8c.html#a0142f64a61623ef95d6c6acbd188e7f2',1,'cc3000_spi.c']]],
   ['chspidriver',['chSpiDriver',['../cc3000__spi_8c.html#a44894f82af6f09a21ca55a497e93f065',1,'cc3000_spi.c']]],
   ['chibios_2frt_20configuration',['ChibiOS/RT Configuration',['../group__config.html',1,'']]],
-  ['connected',['connected',['../structcc3000_asynchronous_data.html#ab36823025f12a809217f7771125658c2',1,'cc3000AsynchronousData']]]
+  ['connected',['connected',['../structcc3000_asynchronous_data.html#ab36823025f12a809217f7771125658c2',1,'cc3000AsynchronousData']]],
+  ['chibios_2frt_20cc3000_20spi_20driver',['ChibiOS/RT CC3000 SPI Driver',['../index.html',1,'']]]
 ];
